@@ -1,0 +1,53 @@
+import React, { useState, useEffect, useContext , useRef} from 'react'
+import axios from "axios"
+import { userContext } from '../../App'
+import DomainCard from '../../components/DomainCard'
+import Shimmer from '../../Common/Shimmer'
+import { Link } from 'react-router-dom'
+const AdminGetDomain = () => {
+  // const navigate=useNavigate();
+  const backurl=import.meta.env.VITE_BACKEND_URL
+  const [DomainList,setDomainList]=useState(null)
+  // console.log(admin,"->")
+  const {admin}=useContext(userContext)
+  useEffect(()=>{
+      if(admin)
+      {
+        axios.get(`${backurl}/api/domain`,
+        {
+            headers:{
+                Authorization: `Bearer ${admin.token}`
+            }
+        }
+        )
+        .then((res)=>{
+            setDomainList(res.data.data);
+            console.log(DomainList)
+        })
+        .catch((err)=>{
+            console.log(err)
+            // return toast.error(err.response)
+        })
+      }
+  },[admin,DomainList])
+  return (
+    DomainList===null ? <Shimmer type="List Of All Domains" className="text-center w-[20%] h-12 flex items-center justify-between p-3 rounded-2xl shadow-xl bg-gradient-to-r from-slate-400 to-slate-300"/>:
+    <div className='bg-gray-300 min-h-screen'>
+      <div className='flex justify-end gap-5 pt-5 px-5'>
+          <Link to="/admin/dashboard/addDomain"><button className='bg-slate-700 text-white  py-1 hover:bg-slate-600 px-4 text-xl rounded-xl focus:outline-none focus:shadow-outline'>Add Another Domain</button></Link>
+          <Link to="/admin/dashboard"><button className='bg-slate-700 text-white  py-1 hover:bg-slate-600 px-4 text-xl rounded-xl focus:outline-none focus:shadow-outline'>Go To Dashboard</button></Link>
+      </div>
+      
+    <div className='flex flex-col items-center justify-center gap-5 h-max py-14'>
+      <h1 className='text-2xl mb-1'>List Of All Domains</h1>
+      {
+        DomainList.map((Domain)=>{
+          return <DomainCard  Domain={Domain}/>
+        })
+      }  
+    </div>
+    </div>
+  )
+}
+
+export default AdminGetDomain
