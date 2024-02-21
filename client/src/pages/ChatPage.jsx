@@ -16,16 +16,14 @@ const ChatPage = () => {
    const [OpenProfile,setOpenProfile]=useState(false)
    const [Back,setBack]=useState(false)
    const [hideSide,sethideSide]=useState(false)
-   const {user,SetUser}=useContext(userContext)
-   const [teacherGroups,setTeacherGroups]=useState()
+   const {user}=useContext(userContext)
+   const [allGroups,setAllGroups]=useState()
   
-   // console.log(user?.token)
    const backurl=import.meta.env.VITE_BACKEND_URL;
    const {id}=useParams();
    
       useEffect(()=>{
-         if(user?.type==="teacher")
-         {
+
             axios.get(`${backurl}/api/${user?.type}Dashboard/${user?.type}Groups`,
             {
                headers:{
@@ -34,28 +32,11 @@ const ChatPage = () => {
             })
             .then((res)=>{
                console.log(res)
-               setTeacherGroups(res.data.data)
+               setAllGroups(res.data.data)
             })
             .catch((err)=>{
                console.log(err);
             })
-         }
-         // if(user?.type==="student")
-         // {
-         //    axios.get(`${backurl}/api/studentDashboard/studentGroups`,
-         //    {
-         //       headers:{
-         //          Authorization:`Bearer ${user?.token}`
-         //       }
-         //    })
-         //    .then((res)=>{
-         //       console.log(res)
-         //       setTeacherGroups(res.data.data)
-         //    })
-         //    .catch((err)=>{
-         //       console.log(err);
-         //    })
-         // }
       },[user]);
       
 
@@ -93,7 +74,7 @@ const ChatPage = () => {
                 
                 <div className='md:h-[90%] flex flex-col gap-2  border-r'>
                      {
-                       user && user?.type==="teacher" && teacherGroups && teacherGroups.map((group)=>(
+                       user &&  allGroups && allGroups.map((group)=>(
                            <Link onClick={handleGroupClick} to={`group/${group.id}`} key={group.group_id}  >
                               <Groups group={group} id1={id}/>
                            </Link>

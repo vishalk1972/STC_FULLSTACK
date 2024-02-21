@@ -14,7 +14,7 @@ const ChatHeader = () => {
   useEffect(()=>{
           if(user && id)
           {
-            axios.get(`${backurl}/api/teacherDashboard/studentsUnderGroup/${id}`,
+            axios.get(`${backurl}/api/${user?.type}Dashboard/studentsUnderGroup/${id}`,
             {
                 headers:{
                   Authorization:`Bearer ${user?.token}`
@@ -29,9 +29,11 @@ const ChatHeader = () => {
             })
           }
    },[user,id])
+   console.log(threestudents,"bccccc")
   return (
     (
         id && <div className='text-center p-5'>
+          
           <h1 className='text-2xl'>{id}</h1>
           {
               threestudents && threestudents.map((student,index)=>(

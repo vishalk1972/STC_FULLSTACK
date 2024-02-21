@@ -43,7 +43,7 @@ const ProfilePage = ({type}) => {
         
         { user && <h2 className='text-xl font-extralight'>{user.type==="student" ? user.student.first_name : user.teacher.name}</h2>}
         { user && <h2 className='text-xl font-extralight'>{user.type==="student" ? user.student.email : user.teacher.email}</h2>}
-        { user && <h2 className='text-xl font-extralight'>Domain : {user.type==="student" ? user.student.domain_name : user.teacher.domain_name}</h2>}
+        {/* { user && <h2 className='text-xl font-extralight'>Domain : {user.type==="student" ? user.student.domain_name : user.teacher.domain_name}</h2>} */}
         <h2 onClick={()=>setChangePass(x=>!x)} className='text-xl underline underline-offset-2 text-center cursor-pointer'>Change Password</h2>
         {
             ChangePass && <form className="shadow-md rounded-lg px-8 pt-6 pb-8 mb-4">
