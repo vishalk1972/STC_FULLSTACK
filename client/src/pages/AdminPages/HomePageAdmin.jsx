@@ -5,6 +5,7 @@ import axios from "axios"
 import { storeInLocal } from '../../assests/local';
 import Loading from '../../Common/Loading';
 import { Toaster,toast } from 'react-hot-toast';
+import { IoChevronBackCircle } from "react-icons/io5"
 
 const HomePageAdmin = () => {
     const navigate=useNavigate();
@@ -30,8 +31,8 @@ const HomePageAdmin = () => {
     setloading(true);
     axios.post(`${backurl}/api/admin/login`,formData)
     .then((res)=>{
-        setloading(false);
-        console.log(res,"called")
+       setloading(false);
+        console.log(res,"ca lled")
         const finalData={...res.data.data,type:"admin"}
         storeInLocal("admin",JSON.stringify(finalData))
         SetAdmin(finalData);
@@ -44,11 +45,11 @@ const HomePageAdmin = () => {
 }
   return (
     admin && admin.token ?  navigate(`/admin/dashboard`) :
-    <div className='flex flex-col h-screen justify-center items-center gap-10 bg-slate-300'>
+    <div className='flex flex-col h-screen justify-center items-center gap-10 bg-[#B4C7ED]'>
         <Toaster/>
         {loading && <Loading/>}
-        <h1 className='text-3xl font-bold '>LOGIN</h1>
-        <form id='formElement' className="bg-slate-200 shadow-2xl rounded-lg px-8 pt-6 pb-8 mb-4 ">
+        <h1 className='text-3xl font-bold'>ADMIN LOGIN</h1>
+        <form id='formElement' className="bg-[#EAF0FA] shadow-2xl rounded-lg px-8 pt-6 pb-8 mb-4 ">
             <div className="mb-4">
                 <label className="block text-black text-2xl font-bold mb-2" htmlFor="email">
                     Username:
@@ -82,6 +83,11 @@ const HomePageAdmin = () => {
               Submit
             </button>        
         </form>
+        <Link to="/">
+            <button className='text-xl'>
+                <IoChevronBackCircle className='w-12 h-12'/>Back
+            </button>
+        </Link>
     </div>
   )
 }

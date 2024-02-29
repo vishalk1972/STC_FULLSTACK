@@ -33,14 +33,14 @@ const AdminGetStudent = () => {
       }
   },[admin,StudentList])
   return (
-    StudentList===null ? <Shimmer type="List Of All Students" className="border-b-2 w-[25%] h-96 flex flex-col  p-4 rounded-2xl shadow-xl bg-gradient-to-r from-slate-400 to-slate-300 gap-1"/>:
-    <div className='bg-gray-300 min-h-screen  '>
+    StudentList===null ? <Shimmer type="List Of All Students" className="border-b-2 w-[25%] h-96 flex flex-col  p-4 rounded-2xl shadow-xl bg-gradient-to-r from-[#80a8ff] to-[#c4d5f9] gap-1"/>:
+    <div className='bg-[#d5e0fb] min-h-screen  '>
         <div className='flex justify-end gap-5 pt-5 px-5'>
-          <Link to="/admin/dashboard/addStudent"><button className='bg-slate-700 text-white  py-1 hover:bg-slate-600 px-4 text-xl rounded-xl focus:outline-none focus:shadow-outline'>Add Another Student</button></Link>
-          <Link to="/admin/dashboard"><button className='bg-slate-700 text-white  py-1 hover:bg-slate-600 px-4 text-xl rounded-xl focus:outline-none focus:shadow-outline'>Go To Dashboard</button></Link>
+          <Link to="/admin/dashboard/addStudent"><button className='bg-[#041643] text-white  py-1 hover:bg-slate-600 px-4 text-xl rounded-xl focus:outline-none focus:shadow-outline'>Add Another Student</button></Link>
+          <Link to="/admin/dashboard"><button className='bg-[#041643] text-white  py-1 hover:bg-slate-600 px-4 text-xl rounded-xl focus:outline-none focus:shadow-outline'>Go To Dashboard</button></Link>
        </div>
         <div className='flex flex-col items-center justify-center gap-5 h-max py-14'>
-          <h1 className='text-2xl mb-1'>List Of All Students</h1>
+          <h1 className='text-2xl font-semibold mb-1'>List Of All Students</h1>
           {
             StudentList.map((student)=>{
                 return< StudentCard student={student}/>

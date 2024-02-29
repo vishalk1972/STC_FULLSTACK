@@ -33,7 +33,7 @@ const StudentCard = ({student}) => {
   return (
     <>
     <Toaster/>
-    <div className='border-b-2 w-[25%] flex justify-between p-8 rounded-2xl shadow-xl bg-gradient-to-r from-slate-400 to-slate-300 gap-1' >
+    <div className='border-b-2 w-[25%] flex justify-between p-8 rounded-2xl shadow-xl bg-gradient-to-r from-[#80a8ff] to-[#c4d5f9] gap-1' >
         <div>
             <h1 className='text-xl'>id: {id}</h1>
             <h1 className='text-xl font-semibold '>Name: {first_name+" "} {last_name}</h1>

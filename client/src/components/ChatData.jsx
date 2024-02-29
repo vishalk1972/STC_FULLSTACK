@@ -20,7 +20,6 @@ import {
 
 import axios from 'axios';
 import { userContext } from '../App';
-import PdfPreview from './PdfPreview';
 import { Toaster,toast } from 'react-hot-toast';
 
 const img2 = "https://i.snipboard.io/LYNi6y.jpg";
@@ -32,27 +31,18 @@ const ChatData = () => {
   const [allChats, setallChats] = useState([])
   const { user } = useContext(userContext)
   // console.log(allChats);
+  // Download File EndPoint
   const fileDownload = (link) => {
     let link_clean = link.slice(2, -2);
-    // const anchor = document.createElement('a');
-    // anchor.href = link_clean;
-    // anchor.target = '_blank';
-    // anchor.click();
-    // const firebaseLink = link_clean;
-    
-    // Check if the user is using Microsoft Edge
     const isEdge = window.navigator.userAgent.includes("Edge");
-
-    // Use specific method for Microsoft Edge or fallback to window.open
     if (isEdge) {
-      // You can use Microsoft Edge-specific methods here
-      window.location.href = link_clean; // or any other Edge-specific method
+      window.location.href = link_clean; 
     } else {
-      // Fallback to window.open for other browsers
       window.open(link_clean, '_blank');
     }
-
   }
+
+  // Upload File EndPoint
   const handleBannerUpload = (e) => {
     let file = e.target.files[0];
     const formData = {}
@@ -63,18 +53,18 @@ const ChatData = () => {
       formData['fk_group'] = id;
     }
     console.log(formData)
-    axios.post(url, formData, {
-      headers: {
-        Authorization: `Bearer ${user?.token}`,
-        "Content-Type ": "multipart/form-data"
-      }
-    })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        toast.error(err.response.data.message)
-      })
+    // axios.post(url, formData, {
+    //   headers: {
+    //     Authorization: `Bearer ${user?.token}`,
+    //     "Content-Type ": "multipart/form-data"
+    //   }
+    // })
+    //   .then((res) => {
+    //     // console.log(res);
+    //   })
+    //   .catch((err) => {
+    //     toast.error(err.response.data.message)
+    //   })
 
   }
 
@@ -86,19 +76,19 @@ const ChatData = () => {
 
   ///fetching all chats
   useEffect(() => {
-    axios.get(url, {
-      headers: {
-        Authorization: `Bearer ${user?.token}`
-      }
-    })
-    .then((res) => {
-      // console.log(res,"upload.............")
-      setallChats(res.data.data);
-    })
-    .catch((err) => {
-      console.log(err);
-      toast.err(err.response.data.message)
-    })
+    // axios.get(url, {
+    //   headers: {
+    //     Authorization: `Bearer ${user?.token}`
+    //   }
+    // })
+    // .then((res) => {
+    //   // console.log(res,"upload.............")
+    //   setallChats(res.data.data);
+    // })
+    // .catch((err) => {
+    //   // console.log(err);
+    //   // return toast.err(err.response.data.message)
+    // })
   }, [user, allChats, id])
   const reply=()=>{
     console.log('reply')
@@ -109,28 +99,28 @@ const ChatData = () => {
     const data = {
       suggestion_text: suggestion_text
     }
-    if (user?.type === "teacher") {
-      url = `${backurl}/api/teacherSuggestions/create`
-      data['fk_group'] = parseInt(id)
-    }
-    axios.post(url, data, {
-      headers: {
-        Authorization: `Bearer ${user?.token}`
-      }
-    })
-      .then((res) => {
-        console.log(res)
-      })
-      .catch((err) => {
-        toast.err(err.response.data.message || "Upload Error")
-      })
+    // if (user?.type === "teacher") {
+    //   url = `${backurl}/api/teacherSuggestions/create`
+    //   data['fk_group'] = parseInt(id)
+    // }
+    // axios.post(url, data, {
+    //   headers: {
+    //     Authorization: `Bearer ${user?.token}`
+    //   }
+    // })
+    //   .then((res) => {
+    //     // console.log(res)
+    //   })
+    //   .catch((err) => {
+    //     toast.err(err.response.data.message || "Upload Error")
+    //   })
   }
   // console.log(allChats)
   // console.log(first)
   return (
     <div className={`text-2xl h-[87%]  ${!id ? "hidden" : ""}`}>
       <Toaster/>
-      <div className='h-full overflow-auto scroll-smooth bg-slate-200'>
+      <div className='h-full overflow-auto scroll-smooth bg-[#dde4f9] '>
         {
           allChats && allChats.map((chat) => (
             <MessageBox
@@ -161,7 +151,7 @@ const ChatData = () => {
 
       </div>
       {/* Input */}
-      <div className='border border-t-gray-300 bg-gray-100 h-[20%] flex justify-between px-6 gap-5 items-center mb-1 relative'>
+      <div className='border border-t-gray-300 bg-[#e5e9f5] h-[20%] flex justify-between px-6 gap-5 items-center mb-1 pb-6 relative'>
         {/* <button onClick={handleAttach}><TiAttachmentOutline className='w-9 h-9'/></button> */}
         <label htmlFor="uploadBanner">
           <TiAttachmentOutline className='w-9 h-9 cursor-pointer' />
@@ -176,7 +166,7 @@ const ChatData = () => {
         </label>
         <div className='w-full'>
           <textarea
-            className='w-full py-4 rounded-xl px-2 text-xl border-l-4 bg-gray-200 overflow-hidden resize-none'
+            className='w-full py-4 rounded-xl px-2 text-xl border-l-4 bg-gray-100 overflow-hidden resize-none'
             type='text'
             placeholder='Enter your message.....'
             rows={2}

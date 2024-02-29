@@ -2,8 +2,8 @@ import React from 'react'
 
 const Shimmer = ({type,className}) => {
   return (
-    <div className='flex flex-col items-center py-14 gap-5 h-screen bg-gray-300'>
-        <h1 className='text-2xl mb-1'>{type}</h1>
+    <div className='flex flex-col items-center py-14 gap-5 h-screen bg-[#E8EDFA] '>
+        <h1 className='text-2xl font-semibold mb-1'>{type}</h1>
         <h1 className={className}>
 
         </h1>

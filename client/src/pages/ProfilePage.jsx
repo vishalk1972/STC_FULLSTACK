@@ -38,7 +38,7 @@ const ProfilePage = ({type}) => {
   return (
     <>
     <Toaster/>
-    <div className="md:w-[30.5%]  w-[100%]  h-screen bg-gray-200 flex flex-col  items-center gap-7 mx-1 py-5 transition-transform duration-500 transform translate-x-0}" >
+    <div className="md:w-[30.5%]  w-[100%]  h-screen bg-[#E8EDFA] flex flex-col  items-center gap-7 mx-1 py-5 transition-transform duration-500 transform translate-x-0}" >
         <img className='w-44 h-44 rounded-full shadow-2xl' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTb3IwnFoJ9Fw5d_q5rHVElUqeHTWeHTaWuIQ&usqp=CAU'></img>
         
         { user && <h2 className='text-xl font-extralight'>{user.type==="student" ? user.student.first_name : user.teacher.name}</h2>}

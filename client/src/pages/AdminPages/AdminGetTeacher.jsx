@@ -35,11 +35,11 @@ const AdminGetTeacher = () => {
       }
   },[admin,TeacherList])
   return (
-    TeacherList===null ? <Shimmer type="List Of All Teachers" className="border-b-2 w-[20%] h-[95%] flex flex-col  p-4 rounded-2xl shadow-xl bg-gradient-to-r from-slate-400 to-slate-300 gap-1"/>:
-    <div className='bg-gray-300 min-h-screen'>
+    TeacherList===null ? <Shimmer type="List Of All Teachers" className="border-b-2 w-[20%] h-[95%] flex flex-col  p-4 rounded-2xl shadow-xl bg-gradient-to-r from-[#80a8ff] to-[#c4d5f9] gap-1"/>:
+    <div className='bg-[#d5e0fb] min-h-screen'>
       <div className='flex justify-end gap-5 pt-5 px-5'>
-          <Link to="/admin/dashboard/addTeacher"><button className='bg-slate-700 text-white  py-1 hover:bg-slate-600 px-4 text-xl rounded-xl focus:outline-none focus:shadow-outline'>Add Another Teacher</button></Link>
-          <Link to="/admin/dashboard"><button className='bg-slate-700 text-white  py-1 hover:bg-slate-600 px-4 text-xl rounded-xl focus:outline-none focus:shadow-outline'>Go To Dashboard</button></Link>
+          <Link to="/admin/dashboard/addTeacher"><button className='bg-[#041643] text-white  py-1 hover:bg-slate-600 px-4 text-xl rounded-xl focus:outline-none focus:shadow-outline'>Add Another Teacher</button></Link>
+          <Link to="/admin/dashboard"><button className='bg-[#041643] text-white  py-1 hover:bg-slate-600 px-4 text-xl rounded-xl focus:outline-none focus:shadow-outline'>Go To Dashboard</button></Link>
       </div>
     <div className='flex flex-col items-center justify-center gap-5 h-max py-14'>
       <h1 className='text-2xl mb-1'>List Of All Teachers</h1>

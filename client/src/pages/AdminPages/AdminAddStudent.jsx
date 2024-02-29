@@ -48,10 +48,10 @@ const AdminAddStudent = () => {
         })
       }
   return (
-    <div className='flex flex-col items-center justify-center h-screen bg-slate-300 '>
+    <div className='flex flex-col items-center justify-center h-screen bg-[#B4C7ED] '>
         <h1 className='text-2xl font-bold my-5'>Add New Student</h1>
         {loading && <Loading/>}
-        <form id='formElement' className="bg-slate-200 shadow-2xl rounded-lg px-8 pt-6 pb-8 mb-1 flex flex-col items-center justify-center">
+        <form id='formElement' className="bg-[#E8EDFA] shadow-2xl rounded-lg px-8 pt-6 pb-8 mb-1 flex flex-col items-center justify-center">
             <div className="mb-1">
                 <label className="block text-black text-xl font-bold mb-1" htmlFor="email">
                    First Name:

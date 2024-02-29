@@ -36,11 +36,11 @@ const GroupCard = ({group}) => {
   return (
     <>
     <Toaster/>
-    <div className='text-center border-b-2 w-[25%] flex items-center justify-between p-5 rounded-2xl shadow-xl bg-gradient-to-r from-slate-400 to-slate-300' >
+    <div className='text-center border-b-2 w-[25%] flex items-center justify-between p-5 rounded-2xl shadow-xl bg-gradient-to-r from-[#80a8ff] to-[#c4d5f9]' >
         <h1 className='text-xl'>Id:{id}</h1>
         <h1 className='text-xl'>Grp Name: {group_id}</h1>
         <h1 className='text-xl'>Teacher Id: {fk_teacher}</h1>
-        <div className='text-xl cursor-pointer' onClick={()=>handleDelete(id,group_id)}>
+        <div className='text-xl cursor-pointer ' onClick={()=>handleDelete(id,group_id)}>
             <RiDeleteBin6Line/>
         </div>
         

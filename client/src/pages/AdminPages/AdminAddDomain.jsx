@@ -44,11 +44,11 @@ const AdminAddDomain = () => {
         })
     }
   return (
-    <div className='flex flex-col items-center py-20  gap-5 bg-gray-300 h-screen'>
+    <div className='flex flex-col items-center py-20  gap-5 bg-[#B4C7ED] h-screen'>
         <Toaster/>
         {loading && <Loading/>}
         <h1 className='text-3xl font-bold my-5'>Add New Domain</h1>
-        <form id='formElement' className="bg-slate-200 shadow-2xl rounded-lg px-8 pt-6  pb-8 mb-4 flex flex-col w-[25%]  mx-auto ">
+        <form id='formElement' className="bg-[#E8EDFA] shadow-2xl rounded-lg px-8 pt-6  pb-8 mb-4 flex flex-col w-[25%]  mx-auto ">
             <div className="mb-4">
                 <label className="block text-black text-2xl font-bold mb-2" htmlFor="email">
                     Domain Name:

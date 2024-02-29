@@ -3,9 +3,10 @@ import axios from "axios"
 import { userContext } from '../../App'
 import {Toaster,toast} from "react-hot-toast"
 import { useNavigate } from 'react-router-dom'
-import { RiDeleteBin6Line } from "react-icons/ri";
 import Loading from '../../Common/Loading'
 const AdminAddTeacher = () => {
+  const designations=["Professor","Asscoiate Professor","Assistant Professor","Adjunct Faculty"]
+  const [designation,setDesignation]=useState("Professor");
   const navigate=useNavigate()
   const {admin}=useContext(userContext)
   const [loading,setLoading]=useState(false);
@@ -15,7 +16,7 @@ const AdminAddTeacher = () => {
     let formData={}
     for(let [key,value] of form.entries())
     {
-        if(key==="fk_domain" || key=="mobile_number")
+        if(key==="fk_domain")
         {
           formData[key]=parseInt(value)
         }
@@ -23,7 +24,8 @@ const AdminAddTeacher = () => {
           formData[key]=value
         }
     }
-     console.log(formData);
+    formData['designation']=designation
+    console.log(formData);
     const backurl=import.meta.env.VITE_BACKEND_URL
     setLoading(true)
     axios.post(`${backurl}/api/teacher/signup`,formData,
@@ -46,16 +48,16 @@ const AdminAddTeacher = () => {
             console.log(err)
             toast.error(err.response.data.message)
         })
-      }
+    }
   
   return (
     <>
-    {loading && <Loading/>}
+    
     <Toaster/>
-    <div className='flex flex-col items-center justify-center h-screen bg-slate-300 '>
-        
-        <h1 className='text-2xl font-bold my-5'>Add New Teacher</h1>
-        <form id='formElement' className="bg-slate-200 shadow-2xl rounded-lg px-8 pt-6 pb-8 mb-4 flex flex-col items-center justify-center">
+    <div className='flex flex-col items-center justify-center h-screen bg-[#B4C7ED] '>
+        {loading && <Loading/>}
+        <h1 className='text-3xl font-semibold my-5'>Add New Teacher</h1>
+        <form id='formElement' className="bg-[#E8EDFA] shadow-2xl rounded-lg px-8 pt-6 pb-8 mb-4 flex flex-col items-center justify-center">
             <div className="mb-2">
                 <label className="block text-black text-xl font-bold mb-1" htmlFor="email">
                     Name:
@@ -83,8 +85,8 @@ const AdminAddTeacher = () => {
             </div>
 
             <div className="mb-2">
-                <label className="block text-black text-xl font-bold mb-1" htmlFor="email">
-                Mobile Number:
+                <label className="block text-black text-xl font-bold mb-1" htmlFor="mobile_number">
+                    Mobile Number:
                 </label>
                 <input
                     className="text-lg shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -98,7 +100,7 @@ const AdminAddTeacher = () => {
 
             <div className="mb-2">
                 <label className="block text-black text-xl font-bold mb-1" htmlFor="email">
-                Registartion Number:
+                    Registartion Number:
                 </label>
                 <input
                     className="text-lg shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -109,17 +111,21 @@ const AdminAddTeacher = () => {
                 />
             </div>
 
-            <div className="mb-2">
-                <label className="block text-black text-xl font-bold mb-1" htmlFor="password">
-                    Domain Id:
+            <div className='mb-2 flex flex-col mr-auto w-full'>
+                <label className="text-black text-xl font-bold mb-1">
+                    Select Designation:
                 </label>
-                <input
-                    className="text-lg shadow appearance-none border rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="fk_domain"
-                    name="fk_domain"
-                    type="number"
-                    placeholder="Domain"
-                />
+                <select
+                    className="px-1 py-2 text-lg bg-gray-100 cursor-pointer outline-none"
+                    value={designation}
+                    onChange={(e) => setDesignation(e.target.value)}    
+                >
+                    {designations.map((des) => (
+                    <option key={des} value={des}>
+                        {des}
+                    </option>
+                    ))}
+                </select>
             </div>
 
             <div className="mb-2">

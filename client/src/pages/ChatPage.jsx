@@ -1,15 +1,11 @@
 import React, {  useContext, useEffect, useState } from 'react';
-import { TiAttachmentOutline } from "react-icons/ti";
-import { LuSend } from "react-icons/lu";
 import ProfilePage from './ProfilePage';
-import {data} from "../assests/data"
 import Groups from '../components/Groups';
 import { Link, useParams } from 'react-router-dom';
 import ChatData from '../components/ChatData';
 import ChatHeader from '../components/ChatHeader';
 import { IoArrowBackSharp } from "react-icons/io5";
 import axios from 'axios';
-import { lookInLocal } from '../assests/local';
 import { userContext } from '../App';
 
 const ChatPage = () => {
@@ -24,19 +20,19 @@ const ChatPage = () => {
    
       useEffect(()=>{
 
-            axios.get(`${backurl}/api/${user?.type}Dashboard/${user?.type}Groups`,
-            {
-               headers:{
-                  Authorization:`Bearer ${user?.token}`
-               }
-            })
-            .then((res)=>{
-               console.log(res)
-               setAllGroups(res.data.data)
-            })
-            .catch((err)=>{
-               console.log(err);
-            })
+            // axios.get(`${backurl}/api/${user?.type}Dashboard/${user?.type}Groups`,
+            // {
+            //    headers:{
+            //       Authorization:`Bearer ${user?.token}`
+            //    }
+            // })
+            // .then((res)=>{
+            //    console.log(res)
+            //    setAllGroups(res.data.data)
+            // })
+            // .catch((err)=>{
+            //    console.log(err);
+            // })
       },[user]);
       
 
@@ -60,19 +56,20 @@ const ChatPage = () => {
   return (
     <div className='flex h-screen overflow-hidden'>
          {/* Profile Image */}
-         <div className={`w-[4.75%] min-w-24 border-r cursor-pointer flex flex-col items-center md:visible overflow-hidden ${hideSide ? "hidden" : ""}`}>
+         <div className={`w-[4.75%] bg-[#eff5ff] min-w-24 border-r cursor-pointer flex flex-col items-center md:visible overflow-hidden ${hideSide ? "hidden" : ""}`}>
             <img  onClick={()=>setOpenProfile(x=>!x)} className="h-fit p-2 rounded-full w-full "src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTb3IwnFoJ9Fw5d_q5rHVElUqeHTWeHTaWuIQ&usqp=CAU'/>
+            <img  onClick={()=>setOpenProfile(x=>!x)} className="h-fit p-2 rounded-full w-full "src='https://play-lh.googleusercontent.com/_bh6XK3B7TAk7kBXC1GHC0j9eS9cw9wQo2K7fiP7FDGAQlcOqgUPT2lx3WgZ0JlOJh8'/>
          </div>
 
          {/* Group and Open Profile */}
          {
             OpenProfile ? <ProfilePage type={OpenProfile}/>: 
-            <div className={`${Back ? "visible w-full " : "hidden "} md:w-[30.25%] md:flex flex-col h-full`}>
-                <div className='bg-gray-100 h-[10%] py-4'>
+            <div className={`${Back ? "visible w-full " : "hidden "} md:w-[30.25%]  md:flex flex-col h-full`}>
+                <div className='bg-[#F5F7FD] h-[10%] py-4 border-r-4'>
                      <h1 className='text-2xl text-center md:mt-5 mt-3 font-semibold'>STC GROUPS</h1>
                 </div>
                 
-                <div className='md:h-[90%] flex flex-col gap-2  border-r'>
+                <div className='md:h-[90%] flex flex-col gap-2 bg-[#E8EDFA]  border-r-4'>
                      {
                        user &&  allGroups && allGroups.map((group)=>(
                            <Link onClick={handleGroupClick} to={`group/${group.id}`} key={group.group_id}  >
@@ -89,7 +86,7 @@ const ChatPage = () => {
          <div className={`${Back || OpenProfile ? "hidden" : "visible"} md:w-[65%]  md:block w-full bg-white border-x-1 `}>
 
             {/* Group Header */}
-            <div className={`border h-[10%] flex justify-center gap-8 ${!id ? "hidden":""}`}>
+            <div className={`border bg-[#F5F7FD] h-[10%] flex justify-center gap-8 ${!id ? "hidden":""}`}>
                      <button className={`p-2 rounded-full bg-gray-200 h-10 w-10 text-2xl mt-5 md:hidden ${Back ? " hidden" : ""}`} onClick={handleBack}><IoArrowBackSharp /></button>
                      <ChatHeader/>
             </div>  

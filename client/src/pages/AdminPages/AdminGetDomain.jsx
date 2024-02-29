@@ -31,15 +31,15 @@ const AdminGetDomain = () => {
       }
   },[admin,DomainList])
   return (
-    DomainList===null ? <Shimmer type="List Of All Domains" className="text-center w-[20%] h-12 flex items-center justify-between p-3 rounded-2xl shadow-xl bg-gradient-to-r from-slate-400 to-slate-300"/>:
-    <div className='bg-gray-300 min-h-screen'>
+    DomainList===null ? <Shimmer type="List Of All Domains" className="text-center w-[20%] h-12 flex items-center justify-between p-3 rounded-2xl shadow-xl bg-gradient-to-r from-[#80a8ff] to-[#c4d5f9]"/>:
+    <div className='bg-[#d5e0fb] min-h-screen'>
       <div className='flex justify-end gap-5 pt-5 px-5'>
-          <Link to="/admin/dashboard/addDomain"><button className='bg-slate-700 text-white  py-1 hover:bg-slate-600 px-4 text-xl rounded-xl focus:outline-none focus:shadow-outline'>Add Another Domain</button></Link>
-          <Link to="/admin/dashboard"><button className='bg-slate-700 text-white  py-1 hover:bg-slate-600 px-4 text-xl rounded-xl focus:outline-none focus:shadow-outline'>Go To Dashboard</button></Link>
+          <Link to="/admin/dashboard/addDomain"><button className='bg-[#041643] text-white  py-1 hover:bg-slate-600 px-4 text-xl rounded-xl focus:outline-none focus:shadow-outline'>Add Another Domain</button></Link>
+          <Link to="/admin/dashboard"><button className='bg-[#041643] text-white  py-1 hover:bg-slate-600 px-4 text-xl rounded-xl focus:outline-none focus:shadow-outline'>Go To Dashboard</button></Link>
       </div>
       
     <div className='flex flex-col items-center justify-center gap-5 h-max py-14'>
-      <h1 className='text-2xl mb-1'>List Of All Domains</h1>
+      <h1 className='text-2xl font-semibold mb-1'>List Of All Domains</h1>
       {
         DomainList.map((Domain)=>{
           return <DomainCard  Domain={Domain}/>

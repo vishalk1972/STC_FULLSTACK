@@ -12,6 +12,11 @@ export default {
         'chat2': "url('https://swall.teahub.io/photos/small/12-129518_wallpaper.jpg')",
       }
     },
+    theme: {
+      colors: {
+        transparent: 'transparent',
+      },
+    },
   },
   plugins: [],
 }

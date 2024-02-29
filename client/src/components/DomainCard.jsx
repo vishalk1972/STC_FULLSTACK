@@ -41,10 +41,10 @@ const DomainCard = ({Domain}) => {
   return (
     <>
     <Toaster/>
-    <div className='text-center border-b-2 w-[20%] flex items-center justify-between p-3 rounded-2xl shadow-xl bg-gradient-to-r from-slate-400 to-slate-300' >
-        <h1>{id}</h1>
-        <h1 className='mx-auto text-xl'>{domain_name}</h1>
-        <div className='text-xl cursor-pointer' onClick={()=>handleDelete(domain_name)}>
+    <div className='text-center border-b-2 w-[20%] flex items-center justify-between p-3 rounded-2xl shadow-xl bg-gradient-to-r from-[#80a8ff] to-[#c4d5f9]' >
+        <h1 className='text-2xl'>{id}</h1>
+        <h1 className='mx-auto text-2xl'>{domain_name}</h1>
+        <div className='text-2xl cursor-pointer rounded-full hover:bg-gray-200' onClick={()=>handleDelete(domain_name)}>
             <RiDeleteBin6Line/>
         </div>
         

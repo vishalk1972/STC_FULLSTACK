@@ -11,6 +11,7 @@ import { Toaster,toast } from 'react-hot-toast'
 const HomePage = ({type}) => {
     const {user,SetUser}=useContext(userContext)
     const [loading,setLoading]=useState(false)
+    const [studentDetails,setStudentDetails]=useState()
     const navigate=useNavigate();
     useEffect(()=>{
         if(user && user.token)
@@ -31,11 +32,13 @@ const HomePage = ({type}) => {
         setLoading(true)
         axios.post(`${backurl}/api/${type}/login`,formData)
         .then((res)=>{
-            console.log(res,"called")
+            console.log(res,"called login")
             setLoading(false)
             const finalData={...res.data.data,type:type}
             storeInLocal("user",JSON.stringify(finalData))
             SetUser(finalData);
+
+            console.log(user?.token,"my token")
         })
         .catch((err)=>{
             setLoading(false)
@@ -47,14 +50,17 @@ const HomePage = ({type}) => {
    user && user.token ?  navigate(`/${user.type}/chat`) :
     <div className='h-screen '>
         <div className='flex h-full'>
-            <img className='md:w-6/12 hidden md:block' src={loginLogo}/>
+            {/* <img className='md:w-6/12 hidden md:block' src={loginLogo}/> */}
+            <div className='md:w-6/12 flex items-center justify-center'>
+                <img className='hidden md:block' src="https://ik.imagekit.io/lyzj6ywpw/logo/pune-institute-of-computer-technology-pict-pune.png"/>
+            </div>
             {
                 type ? 
-                <div className='bg-slate-300 md:w-6/12 w-full flex flex-col justify-center items-center gap-16'>
+                <div className='bg-[#B4C7ED] md:w-6/12 w-full flex flex-col justify-center items-center gap-16'>
                     <Toaster/>
                     {loading && <Loading/>}
                     <h1 className='text-4xl font-semibold'>{type.substring(0, 1).toUpperCase() + type.substring(1)}</h1>
-                    <form id='formElement' className="bg-slate-200 shadow-2xl rounded-lg px-8 pt-6 pb-8 mb-4">
+                    <form id='formElement' className="bg-[#E8EDFA] shadow-2xl rounded-lg px-8 pt-6 pb-8 mb-4">
                         <div className="mb-4">
                             <label className="block text-black text-2xl font-bold mb-2" htmlFor="email">
                                 Email:
@@ -83,7 +89,7 @@ const HomePage = ({type}) => {
 
                         
                         <button
-                            className="bg-black text-white font-bold py-2 hover:bg-slate-600 mt-4 px-6 text-2xl rounded-xl focus:outline-none focus:shadow-outline"
+                            className="bg-[#1B284A] text-white font-bold py-2 hover:bg-slate-600 mt-4 px-6 text-2xl rounded-xl focus:outline-none focus:shadow-outline"
                             type="submit"
                             onClick={handleSubmit}
                         >
@@ -98,18 +104,18 @@ const HomePage = ({type}) => {
                     </Link>
                     
                 </div>
-                : <div className='bg-slate-300 md:w-6/12 w-full flex flex-col justify-center items-center gap-16 relative'>
+                : <div className='bg-[#B4C7ED] md:w-6/12 w-full flex flex-col justify-center items-center gap-16 relative pb-20'>
                     <Link className='mb-auto ml-auto' to="/admin">
-                            <button className='text-xl font-medium bg-grey rounded-lg px-5 py-2 cursor-pointer  hover:underline' >Admin Click Here</button>
+                            <button className='md:text-2xl text-xl font-medium bg-grey rounded-lg px-5 py-3 cursor-pointer  hover:underline' >Admin Click Here</button>
                      </Link>
                      <div className='flex flex-col justify-center items-center mb-auto gap-16'>
-                        <h1 className='text-4xl font-semibold '>LOGIN</h1>
+                        <h1 className='md:text-5xl text-4xl font-semibold '>LOGIN</h1>
                         <div className='flex gap-10'>
                             <Link to="/teacher">
-                                <button className='text-2xl bg-black text-white rounded-lg px-5 py-2 cursor-pointer hover:bg-gray-600' >Teacher</button>
+                                <button className='md:text-3xl text-2xl bg-black text-white rounded-lg px-5 py-2 cursor-pointer hover:bg-gray-600' >Teacher</button>
                             </Link>
                             <Link to="/student">
-                                <button className='text-2xl bg-black text-white rounded-lg px-5 py-2 cursor-pointer hover:bg-gray-600'>Student</button>
+                                <button className='md:text-3xl text-2xl bg-black text-white rounded-lg px-5 py-2 cursor-pointer hover:bg-gray-600'>Student</button>
                             </Link>
                         </div>
                     </div>
