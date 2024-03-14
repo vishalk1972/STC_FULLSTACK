@@ -11,7 +11,6 @@ import { Toaster,toast } from 'react-hot-toast'
 const HomePage = ({type}) => {
     const {user,SetUser}=useContext(userContext)
     const [loading,setLoading]=useState(false)
-    const [studentDetails,setStudentDetails]=useState()
     const navigate=useNavigate();
     useEffect(()=>{
         if(user && user.token)
@@ -33,12 +32,11 @@ const HomePage = ({type}) => {
         axios.post(`${backurl}/api/${type}/login`,formData)
         .then((res)=>{
             console.log(res,"called login")
+            
             setLoading(false)
             const finalData={...res.data.data,type:type}
             storeInLocal("user",JSON.stringify(finalData))
             SetUser(finalData);
-
-            console.log(user?.token,"my token")
         })
         .catch((err)=>{
             setLoading(false)
@@ -55,12 +53,12 @@ const HomePage = ({type}) => {
                 <img className='hidden md:block' src="https://ik.imagekit.io/lyzj6ywpw/logo/pune-institute-of-computer-technology-pict-pune.png"/>
             </div>
             {
-                type ? 
+                type ?  
                 <div className='bg-[#B4C7ED] md:w-6/12 w-full flex flex-col justify-center items-center gap-16'>
                     <Toaster/>
                     {loading && <Loading/>}
                     <h1 className='text-4xl font-semibold'>{type.substring(0, 1).toUpperCase() + type.substring(1)}</h1>
-                    <form id='formElement' className="bg-[#E8EDFA] shadow-2xl rounded-lg px-8 pt-6 pb-8 mb-4">
+                    <form id='formElement' className="bg-[#E8EDFA] shadow-2xl rounded-lg px-8 pt-6 pb-8 mb-4 mx-6 md:mx-0">
                         <div className="mb-4">
                             <label className="block text-black text-2xl font-bold mb-2" htmlFor="email">
                                 Email:

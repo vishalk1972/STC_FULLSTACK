@@ -56,14 +56,14 @@ const AdminAddTeacher = () => {
     <Toaster/>
     <div className='flex flex-col items-center justify-center h-screen bg-[#B4C7ED] '>
         {loading && <Loading/>}
-        <h1 className='text-3xl font-semibold my-5'>Add New Teacher</h1>
+        <h1 className='md:text-3xl text-2xl font-semibold my-5'>Add New Teacher</h1>
         <form id='formElement' className="bg-[#E8EDFA] shadow-2xl rounded-lg px-8 pt-6 pb-8 mb-4 flex flex-col items-center justify-center">
             <div className="mb-2">
-                <label className="block text-black text-xl font-bold mb-1" htmlFor="email">
+                <label className="block text-black md:text-xl text-lg font-bold mb-1" htmlFor="email">
                     Name:
                 </label>
                 <input
-                    className="text-lg shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    className="md:text-lg text-sm shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     id="name"
                     name="name"
                     type="text"
@@ -72,11 +72,11 @@ const AdminAddTeacher = () => {
             </div>
 
             <div className="mb-2">
-                <label className="block text-black text-xl font-bold mb-1" htmlFor="email">
+                <label className="block text-black md:text-xl text-lg font-bold mb-1" htmlFor="email">
                     Email:
                 </label>
                 <input
-                    className="text-lg shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    className="md:text-lg text-sm shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     id="email"
                     name="email"
                     type="text"
@@ -85,11 +85,11 @@ const AdminAddTeacher = () => {
             </div>
 
             <div className="mb-2">
-                <label className="block text-black text-xl font-bold mb-1" htmlFor="mobile_number">
+                <label className="block text-black md:text-xl text-lg font-bold mb-1" htmlFor="mobile_number">
                     Mobile Number:
                 </label>
                 <input
-                    className="text-lg shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    className="md:text-lg text-sm shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     id="mobile_number"
                     name="mobile_number"
                     type="number"
@@ -99,11 +99,11 @@ const AdminAddTeacher = () => {
             </div>
 
             <div className="mb-2">
-                <label className="block text-black text-xl font-bold mb-1" htmlFor="email">
+                <label className="block text-black md:text-xl text-lg font-bold mb-1" htmlFor="email">
                     Registartion Number:
                 </label>
                 <input
-                    className="text-lg shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    className="md:text-lg text-sm shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     id="reg_number"
                     name="reg_number"
                     type="text"
@@ -112,11 +112,11 @@ const AdminAddTeacher = () => {
             </div>
 
             <div className='mb-2 flex flex-col mr-auto w-full'>
-                <label className="text-black text-xl font-bold mb-1">
+                <label className="text-black md:text-xl text-lg font-bold mb-1">
                     Select Designation:
                 </label>
                 <select
-                    className="px-1 py-2 text-lg bg-gray-100 cursor-pointer outline-none"
+                    className="px-1 py-2 md:text-lg text-sm bg-gray-100 cursor-pointer outline-none"
                     value={designation}
                     onChange={(e) => setDesignation(e.target.value)}    
                 >
@@ -129,11 +129,11 @@ const AdminAddTeacher = () => {
             </div>
 
             <div className="mb-2">
-                <label className="block text-black text-xl font-bold mb-1" htmlFor="password">
+                <label className="block text-black md:text-xl text-lg font-bold mb-1" htmlFor="password">
                     Password:
                 </label>
                 <input
-                    className="text-lg shadow appearance-none border rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    className="md:text-lg text-sm shadow appearance-none border rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     id="password"
                     name="password"
                     type="password"
@@ -141,7 +141,7 @@ const AdminAddTeacher = () => {
                 />
             </div>
             <button
-                className="bg-black text-white font-bold py-2 hover:bg-slate-600 mt-4 px-6 text-2xl rounded-xl focus:outline-none focus:shadow-outline"
+                className="bg-black text-white font-bold py-2 hover:bg-slate-600 mt-4 px-6 md:text-2xl text-xl rounded-xl focus:outline-none focus:shadow-outline"
                 type="submit"
                  onClick={handleSubmit}
             >

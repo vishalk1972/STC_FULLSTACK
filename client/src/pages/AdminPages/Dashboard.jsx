@@ -8,7 +8,7 @@ import { Toaster,toast } from 'react-hot-toast'
 import Loading from '../../Common/Loading'
 
 const Dashboard = () => {
-    let cardclass="w-[20%] h-48 rounded-2xl shadow-2xl bg-gradient-to-r from-[#80a8ff] to-[#c4d5f9] hover:scale-105 flex justify-center items-center text-3xl text-black font-semibold"
+    let cardclass="md:w-[20%] md:h-48 w-[90%] md:rounded-2xl rounded-xl shadow-2xl bg-gradient-to-r from-[#80a8ff] to-[#c4d5f9] hover:scale-105 flex justify-center items-center md:text-3xl text-2xl text-black font-semibold border-b-2 border-white "
     const {admin,SetAdmin}=useContext(userContext);
     const backurl=import.meta.env.VITE_BACKEND_URL
     const [loading,setloading]=useState(false);
@@ -40,9 +40,9 @@ const Dashboard = () => {
     <div className='bg-[#d5e0fb] min-h-screen'>
     <>
     <Toaster/>
-    <div className='flex justify-end pr-10 pt-10 '><button onClick={Logout} className='bg-[#041643] text-white font-semibold py-2 hover:bg-slate-600 px-6 text-xl rounded-xl focus:outline-none focus:shadow-outline'>LOGOUT</button></div>
-    <h1 className='text-center text-3xl font-bold pt-8  text-gray-800 from-neutral-200   '>ADMIN DASHBOARD</h1>
-    <div className='flex flex-wrap gap-10 justify-center items-center my-20'>
+    <div className='flex justify-end md:pr-10 pr-2 md:pt-10 pt-2 '><button onClick={Logout} className='bg-[#041643] text-white font-semibold md:py-2 py-1 hover:bg-slate-600 px-6 md:text-xl text-lg rounded-xl focus:outline-none focus:shadow-outline'>LOGOUT</button></div>
+    <h1 className='text-center md:text-3xl text-2xl font-bold pt-3 md:mb-16   text-gray-800 from-neutral-200   '>ADMIN DASHBOARD</h1>
+    <div className='flex flex-wrap md:gap-10 gap-4 justify-center items-center py-6'>
     {   loading && <Loading/>}
         {/* <div className='w-[20%] h-48 rounded-2xl shadow-2xl bg-gradient-to-r from-[#80a8ff] to-[#c4d5f9] hover:scale-105 flex justify-center items-center text-3xl text-black font-semibold'></div> */}
         <Link className={cardclass} to="addDomain">
@@ -55,11 +55,11 @@ const Dashboard = () => {
                 Add Teacher
             </div>
         </Link>
-        <Link className={cardclass} to="addGroup">
+        {/* <Link className={cardclass} to="addGroup">
             <div >
                 Add Group
             </div>
-        </Link>
+        </Link> */}
         <Link className={cardclass} to="addStudent">
             <div >
                 Add Student
@@ -92,7 +92,12 @@ const Dashboard = () => {
         </Link>
         <Link className={cardclass} to="assignDomain">
             <div >
-                Assign Doamin
+                Assign Domain
+            </div>
+        </Link>
+        <Link className={cardclass} to="addNotice">
+            <div >
+                Add Notice
             </div>
         </Link>
     </div>

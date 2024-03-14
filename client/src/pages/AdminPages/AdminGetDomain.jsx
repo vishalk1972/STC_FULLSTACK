@@ -33,9 +33,9 @@ const AdminGetDomain = () => {
   return (
     DomainList===null ? <Shimmer type="List Of All Domains" className="text-center w-[20%] h-12 flex items-center justify-between p-3 rounded-2xl shadow-xl bg-gradient-to-r from-[#80a8ff] to-[#c4d5f9]"/>:
     <div className='bg-[#d5e0fb] min-h-screen'>
-      <div className='flex justify-end gap-5 pt-5 px-5'>
-          <Link to="/admin/dashboard/addDomain"><button className='bg-[#041643] text-white  py-1 hover:bg-slate-600 px-4 text-xl rounded-xl focus:outline-none focus:shadow-outline'>Add Another Domain</button></Link>
-          <Link to="/admin/dashboard"><button className='bg-[#041643] text-white  py-1 hover:bg-slate-600 px-4 text-xl rounded-xl focus:outline-none focus:shadow-outline'>Go To Dashboard</button></Link>
+      <div className='flex justify-end gap-5 md:pt-5 md:px-5 px-2 pt-1'>
+          <Link to="/admin/dashboard/addDomain"><button className='bg-[#041643] text-white  py-1 hover:bg-slate-600 px-4 md:text-xl text-lg rounded-xl focus:outline-none focus:shadow-outline'>Add Domain</button></Link>
+          <Link to="/admin/dashboard"><button className='bg-[#041643] text-white  py-1 hover:bg-slate-600 px-4 md:text-xl text-lg rounded-xl focus:outline-none focus:shadow-outline'>Dashboard</button></Link>
       </div>
       
     <div className='flex flex-col items-center justify-center gap-5 h-max py-14'>

@@ -18,6 +18,8 @@ import AdminAddStudent from "./pages/AdminPages/AdminAddStudent";
 import AdminGetStudent from "./pages/AdminPages/AdminGetStudent";
 import AssignGroups from "./pages/AdminPages/AssignGroups";
 import AssignDomain from "./pages/AdminPages/AssignDomain";
+import AddAllStudent from "./components/AddAllStudent";
+import AdminAddNotice from "./pages/AdminPages/AdminAddNotice";
 
 export const userContext=createContext({})
 function App() {
@@ -48,6 +50,7 @@ function App() {
           <Route path="/" element={<HomePage/>}></Route>
           <Route path="/group" element={<Groups/>}></Route>
           <Route path="/student" element={<HomePage type="student"/>}></Route>
+          <Route path="/student/addAll" element={<AddAllStudent/>}></Route>
           <Route path="/teacher" element={<HomePage type="teacher"/>}></Route>
           <Route path="/admin" element={<HomePageAdmin/>}></Route>
           <Route path="/admin/dashboard" element={<Dashboard/>}></Route>
@@ -61,6 +64,8 @@ function App() {
           <Route path="/admin/dashboard/getStudent" element={<AdminGetStudent/>}></Route>
           <Route path="/admin/dashboard/assign" element={<AssignGroups/>}></Route>
           <Route path="/admin/dashboard/assignDomain" element={<AssignDomain/>}></Route>
+          <Route path="/admin/dashboard/addNotice" element={<AdminAddNotice/>}></Route>
+          
           <Route path="/:person/chat" element={<ChatPage/>}>
               <Route path="group/:id" element={<ChatData/>}></Route>
               <Route path="group/:id" element={<ChatHeader/>}></Route>

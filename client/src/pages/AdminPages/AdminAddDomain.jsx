@@ -47,14 +47,14 @@ const AdminAddDomain = () => {
     <div className='flex flex-col items-center py-20  gap-5 bg-[#B4C7ED] h-screen'>
         <Toaster/>
         {loading && <Loading/>}
-        <h1 className='text-3xl font-bold my-5'>Add New Domain</h1>
-        <form id='formElement' className="bg-[#E8EDFA] shadow-2xl rounded-lg px-8 pt-6  pb-8 mb-4 flex flex-col w-[25%]  mx-auto ">
+        <h1 className='md:text-3xl text-2xl font-bold my-5'>Add New Domain</h1>
+        <form id='formElement' className="bg-[#E8EDFA] shadow-2xl rounded-lg px-8 pt-6  pb-8 mb-4 flex flex-col md:w-[25%]  md:mx-auto mx-4">
             <div className="mb-4">
-                <label className="block text-black text-2xl font-bold mb-2" htmlFor="email">
+                <label className="block text-black md:text-2xl text-xl font-bold mb-2 md:mx-0" htmlFor="email">
                     Domain Name:
                 </label>
                 <input
-                    className="text-xl shadow appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    className="md:text-xl text-lg shadow appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     id="domain_name"
                     name="domain_name"
                     type="text"
@@ -62,7 +62,7 @@ const AdminAddDomain = () => {
                 />
             </div>
             <button
-                className="bg-black text-white font-bold py-2 hover:bg-slate-600 mt-4 px-6 text-2xl rounded-xl focus:outline-none focus:shadow-outline"
+                className="bg-black text-white font-bold py-2 hover:bg-slate-600 mt-4 px-6 md:text-2xl text-xl rounded-xl focus:outline-none focus:shadow-outline"
                 type="submit"
                 onClick={handleSubmit}
             >

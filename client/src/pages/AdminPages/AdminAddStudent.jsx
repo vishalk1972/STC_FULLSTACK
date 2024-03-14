@@ -49,11 +49,11 @@ const AdminAddStudent = () => {
       }
   return (
     <div className='flex flex-col items-center justify-center h-screen bg-[#B4C7ED] '>
-        <h1 className='text-2xl font-bold my-5'>Add New Student</h1>
+        <h1 className='md:text-3xl text-2xl font-bold md:my-5 my-3'>Add New Student</h1>
         {loading && <Loading/>}
         <form id='formElement' className="bg-[#E8EDFA] shadow-2xl rounded-lg px-8 pt-6 pb-8 mb-1 flex flex-col items-center justify-center">
             <div className="mb-1">
-                <label className="block text-black text-xl font-bold mb-1" htmlFor="email">
+                <label className="block text-black md:text-xl text-lg font-bold mb-1" htmlFor="email">
                    First Name:
                 </label>
                 <input
@@ -66,7 +66,7 @@ const AdminAddStudent = () => {
             </div>
 
             <div className="mb-1">
-                <label className="block text-black text-xl font-bold mb-1" htmlFor="email">
+                <label className="block text-black md:text-xl text-lg font-bold mb-1" htmlFor="email">
                     Last Name:
                 </label>
                 <input
@@ -79,7 +79,7 @@ const AdminAddStudent = () => {
             </div>
 
             <div className="mb-1">
-                <label className="block text-black text-xl font-bold mb-1" htmlFor="email">
+                <label className="block text-black md:text-xl text-lg font-bold mb-1" htmlFor="email">
                     Email:
                 </label>
                 <input
@@ -91,7 +91,7 @@ const AdminAddStudent = () => {
                 />
             </div>
             <div className="mb-1">
-                <label className="block text-black text-xl font-bold mb-1" htmlFor="password">
+                <label className="block text-black md:text-xl text-lg font-bold mb-1" htmlFor="password">
                     Roll No:
                 </label>
                 <input
@@ -104,7 +104,7 @@ const AdminAddStudent = () => {
             </div>
 
             <div className="mb-1">
-                <label className="block text-black text-xl font-bold mb-1" htmlFor="email">
+                <label className="block text-black md:text-xl text-lg font-bold mb-1" htmlFor="email">
                 Mobile Number:
                 </label>
                 <input
@@ -118,7 +118,7 @@ const AdminAddStudent = () => {
             </div>
 
             <div className="mb-1">
-                <label className="block text-black text-xl font-bold mb-1" htmlFor="email">
+                <label className="block text-black md:text-xl text-lg font-bold mb-1" htmlFor="email">
                 Registartion Number:
                 </label>
                 <input
@@ -130,7 +130,7 @@ const AdminAddStudent = () => {
                 />
             </div>
 
-            <div className="mb-1">
+            {/* <div className="mb-1">
                 <label className="block text-black text-xl font-bold mb-1" htmlFor="password">
                     Domain Id:
                 </label>
@@ -154,10 +154,10 @@ const AdminAddStudent = () => {
                     type="number"
                     placeholder="Group"
                 />
-            </div>
+            </div> */}
 
             <div className="mb-1">
-                <label className="block text-black text-xl font-bold mb-1" htmlFor="password">
+                <label className="block text-black md:text-xl text-lg font-bold mb-1" htmlFor="password">
                     Password:
                 </label>
                 <input
@@ -169,7 +169,7 @@ const AdminAddStudent = () => {
                 />
             </div>
             <button
-                className="bg-black text-white font-bold py-1 hover:bg-slate-600 mt-4 px-6 text-2xl rounded-xl focus:outline-none focus:shadow-outline"
+                className="bg-black text-white font-bold py-1 hover:bg-slate-600 mt-4 px-6 md:text-2xl text-xl rounded-xl focus:outline-none focus:shadow-outline"
                 type="submit"
                 onClick={handleSubmit}
             >

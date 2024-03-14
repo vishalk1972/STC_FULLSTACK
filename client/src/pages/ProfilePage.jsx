@@ -4,15 +4,17 @@ import { userContext } from '../App'
 import { removeFromLocal } from '../assests/local'
 import axios from 'axios'
 import { Toaster, toast } from 'react-hot-toast'
+import Loading from '../Common/Loading'
 
 const ProfilePage = ({type}) => {
    
     const [ChangePass,setChangePass]=useState(false)
     const {user,SetUser}=useContext(userContext)
     const backurl=import.meta.env.VITE_BACKEND_URL
-    const [Loading,setloading]=useState(false)
+    const [loading,setloading]=useState(false)
     const navigate=useNavigate();
     const handleLogout=()=>{
+        setloading(true)
         axios.post(`${backurl}/api/${user.type}/logout`,{},
         {
             headers:{
@@ -27,22 +29,23 @@ const ProfilePage = ({type}) => {
                 SetUser(null);
                 navigate("/")
             }, 1000);
-            toast.success('Logout Successfully')
+            return toast.success('Logout Successfully')
         })
         .catch((err)=>{
             setloading(false);
-            toast.error(err.response.data.message)
+            return toast.error(err.response.data.message)
         })
     }
     console.log(user,"user in context")
   return (
     <>
-    <Toaster/>
     <div className="md:w-[30.5%]  w-[100%]  h-screen bg-[#E8EDFA] flex flex-col  items-center gap-7 mx-1 py-5 transition-transform duration-500 transform translate-x-0}" >
+        {/* <Toaster/> */}
+        {/* <h1 className='text-2xl mt-4'>PROFILE</h1> */}
         <img className='w-44 h-44 rounded-full shadow-2xl' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTb3IwnFoJ9Fw5d_q5rHVElUqeHTWeHTaWuIQ&usqp=CAU'></img>
-        
-        { user && <h2 className='text-xl font-extralight'>{user.type==="student" ? user.student.first_name : user.teacher.name}</h2>}
+        { user && <h2 className='text-xl font-bold'>{user.type==="student" ? user.student.first_name : user.teacher.name}</h2>}
         { user && <h2 className='text-xl font-extralight'>{user.type==="student" ? user.student.email : user.teacher.email}</h2>}
+        {loading && <Loading/>}
         {/* { user && <h2 className='text-xl font-extralight'>Domain : {user.type==="student" ? user.student.domain_name : user.teacher.domain_name}</h2>} */}
         <h2 onClick={()=>setChangePass(x=>!x)} className='text-xl underline underline-offset-2 text-center cursor-pointer'>Change Password</h2>
         {

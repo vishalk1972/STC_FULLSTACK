@@ -54,17 +54,3 @@ const AdminGetGroup = ()=> {
 }
 
 export default AdminGetGroup
-// {
-//   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTQsImlhdCI6MTcwODA5NDU3NH0.Pb6LOJ3KeDu02JDxXtDazknYMvFujHeEJKcuIwLDa3g",
-//   "student": {
-//       "id": 14,
-//       "first_name": "student2",
-//       "last_name": "patil",
-//       "email": "student2@gmail.com",
-//       "mobile_number": 121212,
-//       "roll_number": 31121,
-//       "reg_number": "stud2RN",
-//       "fk_group": 16,
-//       "fk_domain": 70
-//   }
-// }
