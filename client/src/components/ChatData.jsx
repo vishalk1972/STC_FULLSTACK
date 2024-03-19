@@ -3,25 +3,10 @@ import { useParams } from 'react-router-dom'
 import "react-chat-elements/dist/main.css";
 import { TiAttachmentOutline } from "react-icons/ti";
 import { LuSend } from "react-icons/lu";
-import { FaFile } from "react-icons/fa";
-import { MdDownloading } from "react-icons/md";
 import { FaCloudDownloadAlt } from "react-icons/fa";
-import {
-  ChatItem,
-  MessageBox,
-  SystemMessage,
-  MessageList,
-  ChatList,
-  Input,
-  Button,
-  Popup,
-  SideBar,
-  Navbar,
-  Dropdown,
-  Avatar
-} from "react-chat-elements";
+import { FaFile } from "react-icons/fa";
 import { formatDistanceToNow , format } from 'date-fns';
-
+import { MdDelete } from "react-icons/md";
 
 
 
@@ -45,7 +30,7 @@ const ChatData = () => {
   // Download File EndPoint
   const fileDownload = (link) => {
     let link_clean = link.slice(2, -2);
-    const isEdge = window.navigator.userAgent.includes("Edge");
+    const isEdge = window.navigator.userAgent.includes("microsoft-edge");
     if (isEdge) {
       window.location.href = link_clean; 
     } else {
@@ -88,23 +73,23 @@ const ChatData = () => {
   ///fetching all chats
   useEffect(() => {
     
-    let url = `${backurl}/api/studentChat/group`
-    if (user?.type === "teacher") {
-      url = `${backurl}/api/teacherChat/group/${parseInt(id)}`
-    }
-    axios.get(url, {
-      headers: {
-        Authorization: `Bearer ${user?.token}`
+    if(user){
+      let url = `${backurl}/api/studentChat/group`
+
+      if (user.type === "teacher") {
+        url = `${backurl}/api/teacherChat/group/${parseInt(id)}`
       }
-    })
-    .then((res) => {
-      //  console.log(res,"upload.............")
-      setallChats(res.data.data);
-    })
-    .catch((err) => {
-      // console.log(err);
-      return toast.error(err.response.data.message)
-    })
+
+      axios.get(url, {
+        headers: {
+          Authorization: `Bearer ${user?.token}`
+        }
+      })
+      .then((res) => {
+        //  console.log(res,"upload.............")
+        setallChats(res.data.data);
+      })
+    }
     
   }, [user, allChats, id])
   const reply=()=>{
@@ -134,13 +119,36 @@ const ChatData = () => {
         toast.err(err.response.data.message || "Upload Error")
       })
   }
+  const handleDelete=(id)=>{
+    if(window.confirm("Are You Sure ! Want to delete this message "))
+    {
+      axios.delete(`${backurl}/api/${user.type}Suggestions/delete/${id}`,
+      {
+          headers:{
+              Authorization: `Bearer ${user.token}`
+          }
+      }
+      )
+      .then((res)=>{
+          console.log(res)
+          // setTimeout(() => {
+            return toast.success(`Chat Deleted Successfully`)
+          // }, 1000);  
+      })
+      .catch((err)=>{
+          // console.log(err)
+          return toast.error(err.response)
+      })
+    }
+  }
   // console.log(allChats)
   // console.log(first)
   // console.log(allChats)
+  //bg-[#dde4f9]
   return (
     <div className={`text-2xl h-[87%]  ${!id ? "hidden" : ""}`}>
       <Toaster/>
-      <div className='h-full overflow-auto bg-[#dde4f9] ' ref={chatContainerRef}>
+      <div className='h-full overflow-auto bg-[#cfd9f7] p-2' ref={chatContainerRef}>
         {
           allChats && allChats.map((chat) => (
             // <MessageBox
@@ -169,17 +177,19 @@ const ChatData = () => {
   
             // />
             
-            <div className={`bg-[#f7f8fd] shadow-lg shadow-b shadow-l border-b-2  border-slate-400 w-fit h-fit text-gray-900 ${chat.teacher_uploaded && user?.type === "teacher" || chat.teacher_uploaded === false && user?.type === "student" ? "ml-auto border-l-2 bg-[#c6cefc] " : " mr-auto border-r-2" } ${chat.is_file ? " px-2 ":""} rounded-xl m-2 max-w-[65%] whitespace-pre-line `}>
-                <h1 className='mr-auto text-sm font-bold underline mb-1 pt-2 pl-3 pr-5 '>{chat.uploader_name}</h1>
+            <div className={`bg-[#f7f8fd] shadow-lg shadow-b shadow-l border-b-2   border-slate-400 w-fit h-fit text-gray-900 ${chat.teacher_uploaded && user?.type === "teacher" || chat.teacher_uploaded === false && user?.type === "student" ? "ml-auto border-l-2  " : " mr-auto border-r-2" } ${chat.is_file ? " px-2 ":""} rounded-xl m-2 max-w-[65%] whitespace-pre-line `}>
+                <div className='flex'>
+                <h1 className='mr-auto text-sm font-bold  mb-1 pt-2 pl-3 pr-5 '>{chat.uploader_name}</h1>
+                {chat.teacher_uploaded && user?.type === "teacher" || chat.teacher_uploaded === false && user?.type === "student" ? <button onClick={()=>handleDelete(chat.id)} className='pr-1'><MdDelete /></button>:""}
+                </div>
                 {
                     chat.is_file ? 
-                    <div className='bg-[#dde3fc] rounded flex py-2 px-1 cursor-pointer items-start' onClick={() => { fileDownload(chat.data) }}>
+                    <div className='bg-[#f7f8fd] rounded flex py-2 px-1 cursor-pointer items-start' onClick={() => { fileDownload(chat.data) }}>
                       <FaFile className='' />
                       <h1 className='pl-3 pr-5  text-xl'>{chat.is_file ? chat.data.substring(chat.data.indexOf('_') + 1,chat.data.indexOf('?')) : chat.data}</h1>
                       <FaCloudDownloadAlt className='w-7 h-8 text-center cursor-pointer'  />
                     </div> : <h1 className='pl-3 pr-5  text-xl'>{chat.is_file ? chat.data.substring(chat.data.indexOf('_') + 1,chat.data.indexOf('?')) : chat.data}</h1>
                 }
-                
                 <h1 className='flex justify-end text-sm px-2 pb-1 text-gray-600'>{formatDistanceToNow(new Date(chat.uploaded_at))}</h1>
             </div>
           ))

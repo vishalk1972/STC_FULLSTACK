@@ -22,12 +22,12 @@ const GroupCard = ({group}) => {
         }
         )
         .then((res)=>{
-            console.log(res)
+            // console.log(res)
             toast.success(`${id} Deleted Successfully`)
         })
         .catch((err)=>{
 
-            console.log(err)
+            // console.log(err)
             return toast.error(err.response.data.message || 'Error Deleting Group')
         })
       }

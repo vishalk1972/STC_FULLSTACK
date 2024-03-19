@@ -5,8 +5,7 @@ const Groups = ({group}) => {
     const {id:id1,group_name,fk_group}=group
     const {user}=useContext(userContext)
     const {id}=useParams();
-    console.log(id,"->");
-    console.log(id1,"->")
+  
     // let a= (id==id1 ? " bg-[#d1dbfb] shadow-2xl " : "bg-[#e6ebfa]")
     let a=user.type==="student" ? (id==fk_group ? " bg-[#d1dbfb] shadow-2xl " : "bg-[#e6ebfa]") : (id==id1 ? " bg-[#d1dbfb] shadow-2xl " : "bg-[#e6ebfa]")
 

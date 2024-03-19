@@ -32,7 +32,7 @@ const HomePageAdmin = () => {
     axios.post(`${backurl}/api/admin/login`,formData)
     .then((res)=>{
        setloading(false);
-        console.log(res,"ca lled")
+        // console.log(res,"ca lled")
         const finalData={...res.data.data,type:"admin"}
         storeInLocal("admin",JSON.stringify(finalData))
         SetAdmin(finalData);
@@ -40,7 +40,7 @@ const HomePageAdmin = () => {
     .catch((err)=>{
         setloading(false);
         toast.error(err.response.data.message)
-        console.log(err);
+        // console.log(err);
     })
 }
   return (

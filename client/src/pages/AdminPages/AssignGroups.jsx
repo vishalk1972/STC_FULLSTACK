@@ -107,12 +107,12 @@ const AssignGroups = () => {
             }
             )
             .then((res)=>{
-                console.log(res)
+                // console.log(res)
                 setTeacherUnderDomain(res.data.data);
                 // console.log(TeacherList)
             })
             .catch((err)=>{
-                console.log(err)
+                // console.log(err)
                 // return toast.error(err.response)
             })
         }
@@ -126,11 +126,29 @@ const AssignGroups = () => {
                 }
             )
             .then((res)=>{
-                console.log(res,"final expected")
+                // console.log(res,"final expected")
                 setGroupsLeft(res.data.data)
             })
             .catch((err)=>{
-                console.log(err,"final expected")
+                // console.log(err,"final expected")
+                
+            })
+        }
+        if(selectedTeacher)
+        {
+            axios.get(`${backurl}/api/adminAllocation/getGroupCountDesignation/${selectedTeacher}`,
+                {
+                    headers:{
+                        Authorization: `Bearer ${admin?.token}`
+                    }
+                }
+            )
+            .then((res)=>{
+                console.log(res,"-")
+                // setGroupsLeft(res.data.data)
+            })
+            .catch((err)=>{
+                // console.log(err,"final expected")
                 
             })
         }
@@ -197,6 +215,9 @@ const AssignGroups = () => {
                     }
                 </div>
             }
+            {/* {
+                selectedDomain && 
+            } */}
         </div>
         <div className='ml-40 pt-24 px-10 flex flex-wrap' >
             {/* {
@@ -247,10 +268,13 @@ const AssignGroups = () => {
                         <tr className='bg-[#7579fd] text-gray-50'> 
                             <th className="border-b border-r-2 border-gray-300 md:p-3 p-2 md:text-2xl text-xl">Select</th>
                             <th className="border-b border-r-2 border-gray-300 md:p-3 p-2 md:text-2xl text-xl">Name</th>
+                            <th className="border-b border-r-2 border-gray-300 md:p-3 p-2 md:text-2xl text-xl">Student 1</th>
+                            <th className="border-b border-r-2 border-gray-300 md:p-3 p-2 md:text-2xl text-xl">Student 2</th>
+                            <th className="border-b border-r-2 border-gray-300 md:p-3 p-2 md:text-2xl text-xl">Student 3</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {groupsLeft.map(({ group_name,id},index) => (
+                        {groupsLeft.map(({ group_name,id,students},index) => (
                         <tr key={id} className={`${index%2==0 ? "bg-gray-100" :"bg-[#bed0fd]"}`}>
                             <td className="border-b border-r-2 border-gray-400  md:p-4 p-2 md:text-xl text-lg"><input
                                     id={id}
@@ -261,6 +285,10 @@ const AssignGroups = () => {
                                     style={{ width: '20px', height: '20px' }}
                                 /></td>
                             <td className="border-b border-r-2 border-gray-400  md:p-4 p-2 md:text-xl text-lg">{group_name.toUpperCase()}</td>
+                            <td className="border-b border-r-2 border-gray-400  md:p-4 p-2 md:text-xl text-lg">{students[0].first_name}</td>
+                            <td className="border-b border-r-2 border-gray-400  md:p-4 p-2 md:text-xl text-lg">{students.length>1 ? students[1].first_name : ""}</td>
+                            <td className="border-b border-r-2 border-gray-400  md:p-4 p-2 md:text-xl text-lg">{students.length==3 ? students[2].first_name : " ----- "}</td>
+
                         </tr>
                         ))}
                     </tbody>
@@ -268,7 +296,7 @@ const AssignGroups = () => {
                 </div>
             }
             {
-                selectedDomain && selectedTeacher && groupsLeft.length===0 && <div className="text-2xl p-4 text-center">
+                selectedDomain && selectedTeacher && groupsLeft.length===0 && <div className="text-3xl p-4 text-center">
                     No Groups Left In This Domain For Allocation
                 </div>
             }

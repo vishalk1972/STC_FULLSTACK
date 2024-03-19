@@ -23,13 +23,14 @@ const Dashboard = () => {
         })
         .then((res)=>{
             setloading(false);
-            console.log(res);
+            // console.log(res);
             removeFromLocal("admin");
             SetAdmin(null);
             setTimeout(() => {
                 navigate("/")
-            }, 1000);
+            }, 100);
             toast.success('Logout Successfully')
+            
         })
         .catch((err)=>{
             setloading(false);
@@ -98,6 +99,11 @@ const Dashboard = () => {
         <Link className={cardclass} to="addNotice">
             <div >
                 Add Notice
+            </div>
+        </Link>
+        <Link className={cardclass} to="getFinalData">
+            <div >
+                Final Report Data
             </div>
         </Link>
     </div>

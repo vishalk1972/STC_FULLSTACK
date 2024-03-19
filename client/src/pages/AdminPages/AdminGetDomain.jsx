@@ -22,10 +22,10 @@ const AdminGetDomain = () => {
         )
         .then((res)=>{
             setDomainList(res.data.data);
-            console.log(DomainList)
+            // console.log(DomainList)
         })
         .catch((err)=>{
-            console.log(err)
+            // console.log(err)
             // return toast.error(err.response)
         })
       }
@@ -42,7 +42,7 @@ const AdminGetDomain = () => {
       <h1 className='text-2xl font-semibold mb-1'>List Of All Domains</h1>
       {
         DomainList.map((Domain)=>{
-          return <DomainCard  Domain={Domain}/>
+          return <DomainCard key={Domain.id}  Domain={Domain}/>
         })
       }  
     </div>

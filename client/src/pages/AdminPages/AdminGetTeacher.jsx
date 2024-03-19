@@ -13,26 +13,26 @@ const AdminGetTeacher = () => {
   useEffect(()=>{
       if(admin)
       {
-        axios.get(`${backurl}/api/adminDashboard/getDomainAndTeacher`,
+        axios.get(`${backurl}/api/adminDashboard/teachers`,
         {
             headers:{
-                Authorization: `Bearer ${admin.token}`
+                Authorization: `Bearer ${admin?.token}`
             }
         }
         )
         .then((res)=>{
-            console.log(res)
+            // console.log(res)
             setTeacherList(res.data.data);
             // console.log(TeacherList)
         })
         .catch((err)=>{
-            console.log(err)
+            // console.log(err)
             // return toast.error(err.response)
         })
       }
   },[admin,TeacherList])
     const handleDelete=(id,name)=>{
-        if(admin)
+        if(admin && window.confirm("Are Your Sure ! You Want To Delete This Data"))
           {
             axios.delete(`${backurl}/api/adminDashboard/deleteTeacher/${id}`,
             {
@@ -67,27 +67,29 @@ const AdminGetTeacher = () => {
         <table className="border rounded-xl bg-[#e9ebf0] ">
           <thead className=''>
             <tr className='bg-[#4076fe] text-gray-50'> 
+            <th className="border-b border-r-2 border-gray-300 md:p-6 p-2 md:text-2xl text-xl">Sr</th>
               <th className="border-b border-r-2 border-gray-300 md:p-6 p-2 md:text-2xl text-xl">Id</th>
               <th className="border-b border-r-2 border-gray-300 md:p-4 p-2 md:text-2xl text-xl">Designation</th>
               <th className="border-b border-r-2 border-gray-300  md:p-4 p-2 md:text-2xl text-xl">Name</th>
               <th className="border-b border-r-2 md:p-4 p-2 border-gray-300 md:text-2xl text-xl">Email</th>
-              <th className="border-b border-r-2 md:p-4 p-2 border-gray-300 md:text-2xl text-xl">Domain</th>
+              {/* <th className="border-b border-r-2 md:p-4 p-2 border-gray-300 md:text-2xl text-xl">Domain</th> */}
               <th className="border-b border-r-2 md:p-4 p-2 border-gray-300 md:text-2xl text-xl">Password</th>
               <th className="border-b border-r-2 md:p-6 p-2 border-gray-300 md:text-2xl text-xl">Action</th>
             </tr>
           </thead>
           <tbody>
-            {TeacherList.map(({ id, name, designation, email,password,domains},index) => (
+            {TeacherList.map(({ id, name, designation, email,password},index) => (
               <tr key={id} className={`${index%2==0 ? "bg-gray-100" :"bg-[#bed0fd]"}`}>
+                <td className="border-b border-r-2 border-gray-400  md:p-4 p-2 md:text-xl text-lg">{index+1}</td>
                 <td className="border-b border-r-2 border-gray-400  md:p-4 p-2 md:text-xl text-lg">{id}</td>
                 <td className="border-b border-r-2 border-gray-400  md:p-4 p-2 md:text-xl text-lg">{designation}</td>
                 <td className="border-b border-r-2 border-gray-400  md:p-4 p-2 md:text-xl text-lg ">{name}</td>
                 <td className="border-b border-r-2 border-gray-400  md:p-4 p-2 md:text-xl text-lg ">{email}</td>
-                <td className="border-b border-r-2 border-gray-400  md:p-4 p-2 md:text-xl text-lg ">{
+                {/* <td className="border-b border-r-2 border-gray-400  md:p-4 p-2 md:text-xl text-lg ">{
                     domains.map((domain,index)=>{
                         return <span>{domain.domain_name} {index+1==domains.length ? " ":" , "}</span>
                     })
-                }</td>
+                }</td> */}
                 <td className="border-b border-r-2 border-gray-400  md:p-4 p-2 md:text-xl text-lg ">{password}</td>
                 <td className="border-b border-r-2 border-gray-400  md:p-6  p-2 md:text-xl text-lg "><RiDeleteBin6Line className='cursor-pointer' onClick={() => handleDelete(id, name)} /></td>
               </tr>

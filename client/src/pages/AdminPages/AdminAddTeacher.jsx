@@ -10,6 +10,7 @@ const AdminAddTeacher = () => {
   const navigate=useNavigate()
   const {admin}=useContext(userContext)
   const [loading,setLoading]=useState(false);
+  const backurl=import.meta.env.VITE_BACKEND_URL
   const handleSubmit=(e)=>{
     e.preventDefault()
     let form=new FormData(formElement)
@@ -36,7 +37,7 @@ const AdminAddTeacher = () => {
         }
         )
         .then((res)=>{
-            console.log(res)
+            // console.log(res)
             setLoading(false)
             setTimeout(() => {
                 navigate("/admin/dashboard/getTeacher")
@@ -45,10 +46,32 @@ const AdminAddTeacher = () => {
         })
         .catch((err)=>{
             setLoading(false)
-            console.log(err)
+            // console.log(err)
             toast.error(err.response.data.message)
         })
     }
+    const handleBannerUpload = (e) => {
+        let file = e.target.files[0];
+        const formData = {}
+        formData["file"] = file;
+        // const backurl=import.meta.env.VITE_BACKEND_URL
+        let url = `${backurl}/api/csv/teachers/csv`
+        console.log(formData)
+        axios.post(url, formData, {
+          headers: {
+            Authorization: `Bearer ${admin?.token}`,
+            "Content-Type ": "multipart/form-data"
+          }
+        })
+          .then((res) => {
+            console.log(res);
+            toast.success(res.data.message || "Teachers Added Through CSV Successfully......")
+          })
+          .catch((err) => {
+            toast.error(err.response.data.message)
+          })
+    
+      }
   
   return (
     <>
@@ -56,14 +79,26 @@ const AdminAddTeacher = () => {
     <Toaster/>
     <div className='flex flex-col items-center justify-center h-screen bg-[#B4C7ED] '>
         {loading && <Loading/>}
-        <h1 className='md:text-3xl text-2xl font-semibold my-5'>Add New Teacher</h1>
+        <h1 className='md:text-3xl text-2xl font-bold md:my-5 my-3'>Add New Teacher / <span className='cursor-pointer hover:underline rounded-xl p-1'><label className='cursor-pointer' htmlFor="uploadBanner">
+          {/* <TiAttachmentOutline className='w-9 h-9 cursor-pointer' /> */}Upload CSV
+          <input
+            id="uploadBanner"
+            type="file"
+            // accept=".png, .jpg, .jpeg, .pdf, .ppt, .pptx, .doc, .docx"
+            // accept=".csv"
+            onChange={handleBannerUpload}
+            hidden
+          />
+        </label>
+        </span>
+        </h1>
         <form id='formElement' className="bg-[#E8EDFA] shadow-2xl rounded-lg px-8 pt-6 pb-8 mb-4 flex flex-col items-center justify-center">
             <div className="mb-2">
                 <label className="block text-black md:text-xl text-lg font-bold mb-1" htmlFor="email">
                     Name:
                 </label>
                 <input
-                    className="md:text-lg text-sm shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    className="md:text-lg text-sm shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
                     id="name"
                     name="name"
                     type="text"
@@ -141,7 +176,7 @@ const AdminAddTeacher = () => {
                 />
             </div>
             <button
-                className="bg-black text-white font-bold py-2 hover:bg-slate-600 mt-4 px-6 md:text-2xl text-xl rounded-xl focus:outline-none focus:shadow-outline"
+                className="bg-[#042058] text-white font-bold py-2 hover:bg-slate-600 mt-4 px-6 md:text-2xl text-xl rounded-xl focus:outline-none focus:shadow-outline"
                 type="submit"
                  onClick={handleSubmit}
             >

@@ -20,27 +20,28 @@ import AssignGroups from "./pages/AdminPages/AssignGroups";
 import AssignDomain from "./pages/AdminPages/AssignDomain";
 import AddAllStudent from "./components/AddAllStudent";
 import AdminAddNotice from "./pages/AdminPages/AdminAddNotice";
+import AdminFinalData from "./pages/AdminPages/AdminFinalData";
 
-export const userContext=createContext({})
+export const userContext=createContext({
+  user:{},
+  SetUser : ()=>{},
+  admin:{},
+  SetAdmin:()=>{},
+})
+
 function App() {
-  const [user,SetUser]=useState()
+  const [user,SetUser]=useState({})
   const [admin,SetAdmin]=useState(null)
 
   useEffect(()=>{
     let userinlocal=lookInLocal("user");
-    let admininlocal=lookInLocal("admin")
-    const data=JSON.parse(userinlocal);
-    const admindata=JSON.parse(admininlocal);
-    console.log(data,"data in local")
-    if(data){
-      const {token}=data
-      // console.log(token,"i got")
-      token ? SetUser(JSON.parse(userinlocal)) : ""
+    let admininlocal=lookInLocal("admin")    
+    if(userinlocal){
+      SetUser(JSON.parse(userinlocal))
     }
-    if(admindata)
+    if(admininlocal)
     {
-      const {token}=admindata;
-      token ? SetAdmin(JSON.parse(admininlocal)) : ""
+      SetAdmin(JSON.parse(admininlocal))
     }
     
   },[])
@@ -65,6 +66,7 @@ function App() {
           <Route path="/admin/dashboard/assign" element={<AssignGroups/>}></Route>
           <Route path="/admin/dashboard/assignDomain" element={<AssignDomain/>}></Route>
           <Route path="/admin/dashboard/addNotice" element={<AdminAddNotice/>}></Route>
+          <Route path="/admin/dashboard/getfinalData" element={<AdminFinalData/>}></Route>
           
           <Route path="/:person/chat" element={<ChatPage/>}>
               <Route path="group/:id" element={<ChatData/>}></Route>

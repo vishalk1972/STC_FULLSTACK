@@ -1,16 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import {data} from "../assests/data"
 import { userContext } from '../App';
 import axios from 'axios';
-import { CiMenuKebab } from "react-icons/ci";
-// do api call here using id and show name of group , name of students
 const ChatHeader = ({activeGroup}) => {
  const {id}=useParams();
  const backurl=import.meta.env.VITE_BACKEND_URL
  const {user}=useContext(userContext)
  const [threestudents,setthreestudent]=useState()
- console.log(activeGroup)
+ 
   useEffect(()=>{
           if(user && id)
           {
@@ -33,7 +30,7 @@ const ChatHeader = ({activeGroup}) => {
             })
           }
    },[user,id])
-   console.log(threestudents,"bccccc")
+
   return (
     (
         id && <div className='text-center p-5 flex'>

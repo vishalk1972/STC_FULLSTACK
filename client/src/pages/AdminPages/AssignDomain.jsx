@@ -104,7 +104,7 @@ const AssignDomain = () => {
   return (
     
     <>
-    {loading && <Loading/>}
+    {/* {loading && <Loading/>} */}
     <div className='bg-[#c9d6f8] min-h-screen flex gap-60 '>
         <Toaster/>
         <div className="md:pt-10 md:px-10 md:ml-auto p-2">

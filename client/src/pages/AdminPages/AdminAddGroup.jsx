@@ -36,7 +36,7 @@ const AdminAddGroup = () => {
           }
         )
         .then((res)=>{
-            console.log(res)
+            // console.log(res)
             setLoading(false)
             setTimeout(() => {
                 navigate("/admin/dashboard/getGroup")
@@ -45,7 +45,7 @@ const AdminAddGroup = () => {
         })
         .catch((err)=>{
             setLoading(false)
-            console.log(err)
+            // console.log(err)
             toast.error(err.response.data.message)
         })
       }

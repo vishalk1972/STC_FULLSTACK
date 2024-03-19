@@ -6,7 +6,6 @@ import { Toaster,toast } from 'react-hot-toast'
 import Loading from '../Common/Loading'
 import { useNavigate } from 'react-router-dom'
 import { IoChevronBackCircle } from "react-icons/io5"
-// import axios from 'axios'
 import { removeFromLocal } from '../assests/local'
 const AddAllStudent = () => {
 
@@ -18,7 +17,7 @@ const AddAllStudent = () => {
   const [selectedDomain,setSelectedDomain]=useState()
   const optionList=[2,3];
   const navigate=useNavigate()
-  console.log(selectedDomain,"ganja")
+
 
   useEffect(()=>{
     if(user)
@@ -31,12 +30,12 @@ const AddAllStudent = () => {
         }
         )
         .then((res)=>{
-            console.log(res)
+            // console.log(res)
             setDomainList(res.data.data);
         //   console.log(DomainList)
         })
         .catch((err)=>{
-            console.log(err)
+            // console.log(err)
             // return toast.error(err.response)
         })
     }
@@ -50,21 +49,39 @@ const AddAllStudent = () => {
     {        
         if(key==="domain_id")
         {
+            
             formData[key]=value
         }
         else{
             formData[key]=value
         }
     }
+    console.log(formData)
     const updatedForm={};
+ 
     if(selectedSize==2)
     {
+        if(formData.roll2==='')
+        {
+            return toast.error('Fill Required Data')
+        }
         updatedForm['remaining_roll_numbers']=[formData.roll2];
     }
     else if(selectedSize==3){
+        if(formData.roll3==='')
+        {
+            return toast.error('Fill Required Data')
+        }
         updatedForm['remaining_roll_numbers']=[formData.roll2,formData.roll3];
     }
+    else{
+        return toast.error('Invalid Group Size')
+    }
     updatedForm['domain_id']=selectedDomain;
+    if(updatedForm.domain_id===undefined || updatedForm.domain_id==='' || updatedForm.domain_id===null)
+    {
+        return toast.error('Domain Not Selected !!')
+    }
      console.log(updatedForm);
      const backurl=import.meta.env.VITE_BACKEND_URL
      setloading(true)
@@ -76,7 +93,7 @@ const AddAllStudent = () => {
         }
         )
         .then((res)=>{
-            console.log(res)
+            // console.log(res)
             setloading(false)
             setTimeout(() => {
                 navigate("/student/chat")
@@ -85,7 +102,7 @@ const AddAllStudent = () => {
         })
         .catch((err)=>{
             setloading(false)
-            console.log(err)
+            // console.log(err)
             toast.error(err.response.data.message)
         })
   }
@@ -99,7 +116,7 @@ const AddAllStudent = () => {
     })
     .then((res)=>{
         setloading(false);
-        console.log(res);
+        // console.log(res);
         removeFromLocal("user");
         setTimeout(() => {
             SetUser(null);
@@ -113,7 +130,6 @@ const AddAllStudent = () => {
     })
 }
 
-console.log(user,"user in context")
   return (
     <div className=" h-screen bg-[#B4C7ED]">
     <div className='flex justify-end p-2'>
@@ -128,7 +144,7 @@ console.log(user,"user in context")
             <div className='mb-2 w-full'>
                     
                     <select
-                        className={`px-1 py-2 w-full text-xl bg-[#e8effd] outline-none rounded-lg shadow-lg hover:bg-white`}
+                        className={`px-1 py-2 w-full text-xl bg-[#e8effd] outline-none rounded-lg shadow-sm border-2 border-gray-400 hover:bg-white`}
                         // value={selectedTeacher}
                         onChange={(e) =>{setSelectedSize(e.target.value);console.log(e.target.value,"->>>")}}    
                     >
@@ -145,7 +161,7 @@ console.log(user,"user in context")
                     Student 1:
                 </label>
                 <input
-                    className="text-lg w-full shadow appearance-none border rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline cursor-not-allowed"
+                    className="text-lg shadow appearance-none border rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline cursor-not-allowed"
                     id="roll1"
                     name="roll1"
                     type="text"
@@ -159,7 +175,7 @@ console.log(user,"user in context")
                     Student 2:
                 </label>
                 <input
-                    className="text-lg  shadow appearance-none border rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    className="text-lg  shadow appearance-none border rounded w-full py-3 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     id="roll2"
                     name="roll2"
                     type="text"
@@ -173,7 +189,7 @@ console.log(user,"user in context")
                     Student 3:
                 </label>
                 <input
-                    className="text-lg shadow appearance-none border w-full rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    className="text-lg shadow appearance-none border w-full rounded  py-3 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     id="roll3"
                     name="roll3"
                     type="text"
@@ -182,7 +198,7 @@ console.log(user,"user in context")
             </div>       
             <div className="mt-2 mb-2 flex w-full">
                 <select
-                    className="py-2 w-full text-xl bg-[#e8effd] cursor-pointer outline-none rounded-lg shadow-lg hover:bg-white "
+                    className="py-2 w-full text-xl bg-[#e8effd] cursor-pointer outline-none rounded-lg px-2 shadow-sm border-2 border-gray-400 hover:bg-white "
                     value={selectedDomain}
                     onChange={(e) =>{setSelectedDomain(e.target.value);console.log(e.target.value,"->>>")}}    
                 >
@@ -206,11 +222,6 @@ console.log(user,"user in context")
               Submit
             </button>        
         </form>
-        <Link to="/">
-            <button className='text-xl'>
-                <IoChevronBackCircle className='w-12 h-12'/>Back
-            </button>
-        </Link>
     </div>
     </div>
   )

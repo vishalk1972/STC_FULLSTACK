@@ -12,12 +12,8 @@ const HomePage = ({type}) => {
     const {user,SetUser}=useContext(userContext)
     const [loading,setLoading]=useState(false)
     const navigate=useNavigate();
-    useEffect(()=>{
-        if(user && user.token)
-        {
-            navigate(`/${user.type}/chat`)
-        }
-    },[])
+    
+
     function handleSubmit(e){
         e.preventDefault()
         let form=new FormData(formElement)
@@ -30,24 +26,35 @@ const HomePage = ({type}) => {
         const backurl=import.meta.env.VITE_BACKEND_URL
         setLoading(true)
         axios.post(`${backurl}/api/${type}/login`,formData)
-        .then((res)=>{
-            console.log(res,"called login")
-            
+        .then((res)=>{            
             setLoading(false)
             const finalData={...res.data.data,type:type}
             storeInLocal("user",JSON.stringify(finalData))
             SetUser(finalData);
+            setTimeout(() => {
+                navigate(`/${user.type}/chat`)
+            }, 1000);
         })
         .catch((err)=>{
             setLoading(false)
             toast.error(err.response.data.message)
-            console.log(err);
+            // console.log(err);
         })
     }
+
+    useEffect(()=>{
+        if(user && user.token)
+        {
+            navigate(`/${user.type}/chat`)
+        }
+    },[navigate,user])
+
   return (
-   user && user.token ?  navigate(`/${user.type}/chat`) :
-    <div className='h-screen '>
+    <userContext.Provider value={user}>
+        <div className='h-screen '>
+        <Toaster/>
         <div className='flex h-full'>
+       
             {/* <img className='md:w-6/12 hidden md:block' src={loginLogo}/> */}
             <div className='md:w-6/12 flex items-center justify-center'>
                 <img className='hidden md:block' src="https://ik.imagekit.io/lyzj6ywpw/logo/pune-institute-of-computer-technology-pict-pune.png"/>
@@ -55,7 +62,7 @@ const HomePage = ({type}) => {
             {
                 type ?  
                 <div className='bg-[#B4C7ED] md:w-6/12 w-full flex flex-col justify-center items-center gap-16'>
-                    <Toaster/>
+                    
                     {loading && <Loading/>}
                     <h1 className='text-4xl font-semibold'>{type.substring(0, 1).toUpperCase() + type.substring(1)}</h1>
                     <form id='formElement' className="bg-[#E8EDFA] shadow-2xl rounded-lg px-8 pt-6 pb-8 mb-4 mx-6 md:mx-0">
@@ -103,6 +110,7 @@ const HomePage = ({type}) => {
                     
                 </div>
                 : <div className='bg-[#B4C7ED] md:w-6/12 w-full flex flex-col justify-center items-center gap-16 relative pb-20'>
+
                     <Link className='mb-auto ml-auto' to="/admin">
                             <button className='md:text-2xl text-xl font-medium bg-grey rounded-lg px-5 py-3 cursor-pointer  hover:underline' >Admin Click Here</button>
                      </Link>
@@ -122,6 +130,7 @@ const HomePage = ({type}) => {
         </div>
         
     </div>
+    </userContext.Provider>
   )
 }
 

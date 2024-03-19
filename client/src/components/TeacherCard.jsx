@@ -17,13 +17,13 @@ const TeacherCard = ({teacher}) => {
             }
             )
             .then((res)=>{
-                console.log(res)
+                // console.log(res)
                 setTimeout(() => {
                   return toast.success(`${name} Deleted Successfully`)
                 }, 1000);  
             })
             .catch((err)=>{
-                console.log(err)
+                // console.log(err)
                 return toast.error(err.response.data.message || "Error Deleting Data")
             })
           }

@@ -9,6 +9,7 @@ const AdminAddStudent = () => {
     const navigate=useNavigate()
   const {admin}=useContext(userContext)
   const [loading,setloading]=useState(false);
+  const backurl=import.meta.env.VITE_BACKEND_URL
   const handleSubmit=(e)=>{
     e.preventDefault()
     let form=new FormData(formElement)
@@ -23,8 +24,8 @@ const AdminAddStudent = () => {
           formData[key]=value
         }
     }
-     console.log(formData);
-    const backurl=import.meta.env.VITE_BACKEND_URL
+    //  console.log(formData);
+   
     setloading(true)
     axios.post(`${backurl}/api/student/signup`,formData,
         {
@@ -33,8 +34,8 @@ const AdminAddStudent = () => {
             }
         }
         )
-        .then((res)=>{
-            console.log(res)
+        .then((res)=>{  
+            // console.log(res)
             setloading(false)
             setTimeout(() => {
                 navigate("/admin/dashboard/getStudent   ")
@@ -43,13 +44,52 @@ const AdminAddStudent = () => {
         })
         .catch((err)=>{
             setloading(false)
-            console.log(err)
+            // console.log(err)
             toast.error(err.response.data.message)
         })
       }
+
+      const handleBannerUpload = (e) => {
+        let file = e.target.files[0];
+        const formData = {}
+        formData["file"] = file;
+        // const backurl=import.meta.env.VITE_BACKEND_URL
+        let url = `${backurl}/api/csv/students/csv`
+        console.log(formData)
+        axios.post(url, formData, {
+          headers: {
+            Authorization: `Bearer ${admin?.token}`,
+            "Content-Type ": "multipart/form-data"
+          }
+        })
+          .then((res) => {
+            console.log(res);
+            navigate("/admin/dashboard/getStudent   ")
+            setTimeout(() => {
+                toast.success(res.data.message)
+            }, 1000);
+          })
+          .catch((err) => {
+            toast.error(err.response.data.message)
+          })
+    
+      }
   return (
     <div className='flex flex-col items-center justify-center h-screen bg-[#B4C7ED] '>
-        <h1 className='md:text-3xl text-2xl font-bold md:my-5 my-3'>Add New Student</h1>
+        <Toaster/>
+        <h1 className='md:text-3xl text-2xl font-bold md:my-5 my-3'>Add New Student / <span className='cursor-pointer hover:underline rounded-xl p-1'><label className='cursor-pointer' htmlFor="uploadBanner">
+          {/* <TiAttachmentOutline className='w-9 h-9 cursor-pointer' /> */}Upload CSV
+          <input
+            id="uploadBanner"
+            type="file"
+            // accept=".png, .jpg, .jpeg, .pdf, .ppt, .pptx, .doc, .docx"
+            // accept=".csv"
+            onChange={handleBannerUpload}
+            hidden
+          />
+        </label>
+        </span>
+        </h1>
         {loading && <Loading/>}
         <form id='formElement' className="bg-[#E8EDFA] shadow-2xl rounded-lg px-8 pt-6 pb-8 mb-1 flex flex-col items-center justify-center">
             <div className="mb-1">

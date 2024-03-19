@@ -8,6 +8,7 @@ const AdminAddDomain = () => {
     const navigate=useNavigate();
     const {admin,SetAdmin}=useContext(userContext);
     const [loading,setLoading]=useState(false)
+    const [domain,setdomain]=useState('')
     async function handleSubmit(e){
         e.preventDefault()
         let form=new FormData(formElement)
@@ -58,11 +59,14 @@ const AdminAddDomain = () => {
                     id="domain_name"
                     name="domain_name"
                     type="text"
+                    value={domain}
+                    onChange={()=>setdomain(e.target.value)}
                     placeholder="Name of Domain"
+                    required
                 />
             </div>
             <button
-                className="bg-black text-white font-bold py-2 hover:bg-slate-600 mt-4 px-6 md:text-2xl text-xl rounded-xl focus:outline-none focus:shadow-outline"
+                className="bg-[#042058] text-white font-bold py-2 hover:bg-slate-600 mt-4 px-6 md:text-2xl text-xl rounded-xl focus:outline-none focus:shadow-outline"
                 type="submit"
                 onClick={handleSubmit}
             >

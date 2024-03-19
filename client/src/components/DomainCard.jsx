@@ -15,7 +15,7 @@ const DomainCard = ({Domain}) => {
     const data={}
     data["domain_name"]=domain_name;
     console.log(data)
-    if(admin)
+    if(admin && window.confirm("Are Your Sure ! You Want To Delete This Data"))
       {
         axios.delete(`${backurl}/api/domain/delete/${domain_name}`,
         {
@@ -25,14 +25,14 @@ const DomainCard = ({Domain}) => {
         }
         )
         .then((res)=>{
-            console.log(res)
+            // console.log(res)
             setTimeout(() => {
               return toast.success(`${domain_name} Deleted Successfully`)
             }, 1000);  
         })
         .catch((err)=>{
 
-            console.log(err)
+            // console.log(err)
             return toast.error(err.response)
         })
       }
