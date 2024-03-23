@@ -47,8 +47,7 @@ const AdminFinalData = () => {
                 <thead className=''>
                     <tr className='bg-[#4076fe] text-gray-50'> 
                     <th className="border-b border-r-2 border-gray-300 md:p-4 p-2 md:text-2xl text-xl">Sr</th>
-                    <th className="border-b border-r-2 border-gray-300 md:p-4 p-2 md:text-2xl text-xl">Id</th>
-                    <th className="border-b border-r-2 border-gray-300 md:p-4 p-2 md:text-2xl text-xl">Group Name</th>
+                    <th className="border-b border-r-2 border-gray-300 md:p-4 p-2 md:text-2xl text-xl">Group Id</th>
                     <th className="border-b border-r-2 border-gray-300 md:p-4 p-2 md:text-2xl text-xl">Download</th>
                     </tr>
                 </thead>
@@ -56,7 +55,6 @@ const AdminFinalData = () => {
                     {dataList.map(({ id,fk_group,data, },index) => (
                     <tr key={id} className={`${index%2==0 ? "bg-gray-100" :"bg-[#bed0fd]"}`}> 
                     <td className="border-b border-r-2 border-gray-400  md:p-6 p-2 md:text-xl text-lg">{index+1}</td>
-                        <td className="border-b border-r-2 border-gray-400  md:p-6 p-2 md:text-xl text-lg">GRP {id}</td>
                         <td className="border-b border-r-2 border-gray-400  md:p-8 md:text-xl text-lg ">{fk_group}</td>
                         <td onClick={()=>fileDownload(data)} className="border-b border-r-2 border-gray-400  md:p-4 p-2 md:text-xl text-lg underline text-blue-400 cursor-pointer">Download</td>
                     </tr>
