@@ -67,7 +67,7 @@ const ChatPage = () => {
    const handleBlur=()=>{
       // setTimeout(()=>{
          // console.log(" bc xxxxxxxx")
-          setfinalUploadPanel(false)
+         //  setfinalUploadPanel(false)
       // },200)
   }
   console.log(activeGroup,"activegrp")
@@ -91,7 +91,7 @@ const ChatPage = () => {
    }
 
    const handleBannerUpload = (e) => {
-      // console.log(e,"bccccccccccccccccccccccccc aai")
+      
       let file = e.target.files[0];
       const formData = {}
       formData["file"] = file;
@@ -104,12 +104,12 @@ const ChatPage = () => {
         }
       })
         .then((res) => {
-         //  console.log(res);
+          console.log(res);
           toast.success("Upload Succesfully...")
         })
         .catch((err) => {
-         // console.log(err)
-          toast.error(err.response.data.message)
+         console.log(err,"bc plz")
+          toast.error("Upload Error" || err.response.data.message)
         })
         
     }
@@ -147,7 +147,7 @@ const ChatPage = () => {
                                              type="file"
                                              // accept=".png, .jpg, .jpeg, .pdf, .ppt, .pptx, .doc, .docx"
                                              accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf"
-                                             onChange={(e)=>handleBannerUpload(e)}
+                                             onChange={handleBannerUpload}
                                              hidden
                                           />
                                        </label>
