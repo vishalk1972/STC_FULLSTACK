@@ -1,6 +1,5 @@
 import React, {  useContext, useEffect, useState } from 'react';
 import ProfilePage from './ProfilePage';
-import Groups from '../components/Groups';
 import { Link, useParams,useNavigate, useActionData  } from 'react-router-dom';
 import ChatData from '../components/ChatData';
 import ChatHeader from '../components/ChatHeader';
@@ -64,6 +63,11 @@ const ChatPage = () => {
          // sethideSide(true);
       }
    }
+   const handleBlur=()=>{
+      setTimeout(()=>{
+         setfinalUploadPanel(false);
+      },2000)
+   }
 
 
    const onGroupClick=(group)=>{
@@ -90,19 +94,21 @@ const ChatPage = () => {
         }
       })
         .then((res) => {
-          toast.success("Upload Succesfully...")
+         console.log(res,"okkk")
+         return toast.success("Upload Succesfully...")
         })
         .catch((err) => {
-         // console.log(err,"ok")
-          toast.error("Upload Error" || err.response.data.message)
+         return toast.error("Upload Error" || err.response.data.message)
         })
         
     }
 
   return (
+   <>
+   <Toaster/>
     <div className='flex h-screen overflow-hidden'>
          {/* Profile Image */}
-         
+         <Toaster/>
          <div className={`md:w-[4.75%] w-[4%] min-w-20  bg-[#eff5ff] md:min-w-24 border-r cursor-pointer flex flex-col items-center md:visible overflow-hidden ${hideSide ? "hidden":""}`}>
             <img  onClick={()=>{setOpenProfile(x=>!x);setOpenNotice(false)}} className="h-fit p-2 rounded-full w-full hover:shadow-xl hover:shadow-blue-200  "src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTb3IwnFoJ9Fw5d_q5rHVElUqeHTWeHTaWuIQ&usqp=CAU'/>
             <img  onClick={()=>{setOpenNotice(x=>!x);setOpenProfile(false)}} className="md:h-24 p-2 rounded-full w-full hover:shadow-xl hover:shadow-blue-200 "src='https://cdn1.iconfinder.com/data/icons/twitter-ui-glyph/48/Sed-23-512.png'/>
@@ -115,14 +121,14 @@ const ChatPage = () => {
             
             <div className={`md:w-[30.25%]  flex flex-col h-full w-full ${activeGroup ? " hidden ":""} `}>
                 <div className={`bg-[#F5F7FD] h-[10%] border-r-4 text-center flex ${activeGroup ? " hidden ":""}`}>
-                     
-                     <h1 className={`md:text-2xl text-xl text-center ${user.type==="student"? " ml-auto ":" mx-auto "} py-8  font-semibold`}>STC GROUPS</h1>
+                  
+                     <h1 onClick={()=>setfinalUploadPanel(false)} className={`md:text-2xl text-xl inline-block text-center ${user.type==="student"? " ml-auto ":" mx-auto "} py-8  font-semibold`}>STC GROUPS</h1>
                      {/* <div className='flex'> */}
                      { user?.type==='student' &&  allGroups.length>0 && allGroups[0].fk_teacher && <CiMenuKebab onClick={()=>setfinalUploadPanel(x=>!x)}  className={`ml-auto cursor-pointer inline mt-8 w-10 h-10 relative ${finalUploadPanel ? "shadow-xl rounded-xl p-1 bg-blue-100" :""}`} /> }
                      {/* </div> */}
                      {
 
-                           <div tabIndex={0}>
+                           <div tabIndex={0} onBlur={handleBlur}>
                               {
                                  finalUploadPanel && <div tabIndex={0} className='rounded-lg absolute md:translate-x-0 -translate-x-28 text-xl translate-y-16  bg-white shadow-xl z-10 py-2 px-2 hover:bg-slate-200 cursor-pointer'>
                                        <label htmlFor="uploadBanner" className='cursor-pointer'>
@@ -143,7 +149,7 @@ const ChatPage = () => {
                      }
                 </div>
                 
-                <div className={`h-[90%] flex flex-col gap-2 bg-[#E8EDFA] md:visible  border-r-4 ${activeGroup ? " hidden ": " "}`}>
+                <div onClick={()=>setfinalUploadPanel(false)} className={`h-[90%] flex flex-col gap-2 bg-[#E8EDFA] md:visible  border-r-4 ${activeGroup ? " hidden ": " "}`}>
                      {
                        user && allGroups && allGroups.length>0 && allGroups[0].fk_teacher ? allGroups.map((group)=>(
                            // <Link  to={`group/${user?.type=="teacher" ? group.id : group.fk_group}`} key={user?.type==="teacher" ? group.id :group.fk_group}  >
@@ -166,8 +172,7 @@ const ChatPage = () => {
          }
 
          {/* Chat Section */} 
-         {/* <Toaster/> */}
-         <div className={`${activeGroup==false || OpenProfile || OpenNotice ? " hidden " : " visible "} md:w-[65%]  md:block w-full bg-white border-x-1 `}>
+         <div onClick={()=>setfinalUploadPanel(false)} className={`${activeGroup==false || OpenProfile || OpenNotice ? " hidden " : " visible "} md:w-[65%]  md:block w-full bg-white border-x-1 `}>
             {/* Group Header */}
             <div className={`border bg-[#F5F7FD] h-[10%] flex justify-center gap-8 ${!id ? "hidden":""}`}>
                      <button className={`p-2 rounded-full bg-gray-200 h-10 w-10 text-2xl mt-5 md:hidden`} onClick={handleBack}><IoArrowBackSharp /></button>
@@ -183,6 +188,7 @@ const ChatPage = () => {
             </div>
          </div>
     </div>
+    </>
   )
 }
 
