@@ -142,7 +142,7 @@ const ChatPage = () => {
                      }
                 </div>
                 
-                <div onClick={()=>setfinalUploadPanel(false)} className={`h-[90%] flex flex-col gap-2 bg-[#E8EDFA] md:visible  border-r-4 ${activeGroup ? " hidden ": " "}`}>
+                <div className={`h-[90%] flex flex-col gap-2 bg-[#E8EDFA] md:visible  border-r-4 ${activeGroup ? " hidden ": " "}`}>
                      {
                        user && allGroups && allGroups.length>0 && allGroups[0].fk_teacher ? allGroups.map((group)=>(
                            // <Link  to={`group/${user?.type=="teacher" ? group.id : group.fk_group}`} key={user?.type==="teacher" ? group.id :group.fk_group}  >
@@ -166,7 +166,7 @@ const ChatPage = () => {
 
          {/* Chat Section */} 
          {/* <Toaster/> */}
-         <div onClick={()=>setfinalUploadPanel(false)} className={`${activeGroup==false || OpenProfile || OpenNotice ? " hidden " : " visible "} md:w-[65%]  md:block w-full bg-white border-x-1 `}>
+         <div className={`${activeGroup==false || OpenProfile || OpenNotice ? " hidden " : " visible "} md:w-[65%]  md:block w-full bg-white border-x-1 `}>
             {/* Group Header */}
             <div className={`border bg-[#F5F7FD] h-[10%] flex justify-center gap-8 ${!id ? "hidden":""}`}>
                      <button className={`p-2 rounded-full bg-gray-200 h-10 w-10 text-2xl mt-5 md:hidden`} onClick={handleBack}><IoArrowBackSharp /></button>

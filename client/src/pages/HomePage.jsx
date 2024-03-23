@@ -32,7 +32,7 @@ const HomePage = ({type}) => {
             storeInLocal("user",JSON.stringify(finalData))
             SetUser(finalData);
             setTimeout(() => {
-                navigate(`/${user.type}/chat`)
+                navigate(`chat`)
             }, 1000);
         })
         .catch((err)=>{
