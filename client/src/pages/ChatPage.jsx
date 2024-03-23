@@ -64,26 +64,12 @@ const ChatPage = () => {
          // sethideSide(true);
       }
    }
-   const handleBlur=()=>{
-      // setTimeout(()=>{
-         // console.log(" bc xxxxxxxx")
-         //  setfinalUploadPanel(false)
-      // },200)
-  }
-  console.log(activeGroup,"activegrp")
-  console.log(Back,"Back")
 
-  
 
    const onGroupClick=(group)=>{
-      // setActiveGroup({ id: group.id, name: group.group_name });
-      // console.log(group,"here")
-      // setBack(false)
       
       const isMediumOrLarger = window.innerWidth >= 768; // Adjust the breakpoint as needed
-      // Update state based on the screen size
       if (isMediumOrLarger) {
-         // sethideSide(false);
       } else {
          setActiveGroup(x=>!x);
          sethideSide(true);
@@ -104,12 +90,10 @@ const ChatPage = () => {
         }
       })
         .then((res) => {
-          console.log(res);
-          toast.success("Upload Succesfully...")
+          return toast.success("Upload Succesfully...")
         })
         .catch((err) => {
-         console.log(err,"bc plz")
-          toast.error("Upload Error" || err.response.data.message)
+          return toast.error("Upload Error" || err.response.data.message)
         })
         
     }
@@ -137,9 +121,9 @@ const ChatPage = () => {
                      {/* </div> */}
                      {
                         
-                           <div tabIndex={0} onBlur={handleBlur}>
+                           <div tabIndex={0}>
                               {
-                                 finalUploadPanel && <div tabIndex={0} onBlur={handleBlur}  className='rounded-lg absolute md:translate-x-0 -translate-x-28 text-xl translate-y-16  bg-white shadow-xl z-10 py-2 px-2 hover:bg-slate-200 cursor-pointer'>
+                                 finalUploadPanel && <div tabIndex={0} className='rounded-lg absolute md:translate-x-0 -translate-x-28 text-xl translate-y-16  bg-white shadow-xl z-10 py-2 px-2 hover:bg-slate-200 cursor-pointer'>
                                        <label htmlFor="uploadBanner" className='cursor-pointer'>
                                           Final Document Upload
                                           <input
