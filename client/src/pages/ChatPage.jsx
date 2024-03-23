@@ -82,7 +82,7 @@ const ChatPage = () => {
       const formData = {}
       formData["file"] = file;
       let url = `${backurl}/api/uploadFile/abstract`
-      console.log(formData)
+      // console.log(formData)
       axios.post(url, formData, {
         headers: {
           Authorization: `Bearer ${user?.token}`,
@@ -90,10 +90,11 @@ const ChatPage = () => {
         }
       })
         .then((res) => {
-          return toast.success("Upload Succesfully...")
+          toast.success("Upload Succesfully...")
         })
         .catch((err) => {
-          return toast.error("Upload Error" || err.response.data.message)
+         // console.log(err,"ok")
+          toast.error("Upload Error" || err.response.data.message)
         })
         
     }
@@ -117,10 +118,10 @@ const ChatPage = () => {
                      
                      <h1 className={`md:text-2xl text-xl text-center ${user.type==="student"? " ml-auto ":" mx-auto "} py-8  font-semibold`}>STC GROUPS</h1>
                      {/* <div className='flex'> */}
-                     { user?.type==='student' &&  allGroups.length>0 && <CiMenuKebab onClick={()=>setfinalUploadPanel(x=>!x)}  className={`ml-auto inline mt-8 w-10 h-10 relative ${finalUploadPanel ? "shadow-xl rounded-xl p-1 bg-blue-100" :""}`} /> }
+                     { user?.type==='student' &&  allGroups.length>0 && allGroups[0].fk_teacher && <CiMenuKebab onClick={()=>setfinalUploadPanel(x=>!x)}  className={`ml-auto cursor-pointer inline mt-8 w-10 h-10 relative ${finalUploadPanel ? "shadow-xl rounded-xl p-1 bg-blue-100" :""}`} /> }
                      {/* </div> */}
                      {
-                        
+
                            <div tabIndex={0}>
                               {
                                  finalUploadPanel && <div tabIndex={0} className='rounded-lg absolute md:translate-x-0 -translate-x-28 text-xl translate-y-16  bg-white shadow-xl z-10 py-2 px-2 hover:bg-slate-200 cursor-pointer'>
