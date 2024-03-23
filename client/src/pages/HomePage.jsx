@@ -109,7 +109,7 @@ const HomePage = ({type}) => {
                     </Link>
                     
                 </div>
-                : <div className='bg-[#B4C7ED] md:w-6/12 w-full flex flex-col justify-center items-center gap-16 relative pb-20'>
+                : <div className='bg-[#B4C7ED] md:w-6/12 w-full flex flex-col justify-center items-center gap-16 relative pb-48 md:pb-20'>
 
                     <Link className='mb-auto ml-auto' to="/admin">
                             <button className='md:text-2xl text-xl font-medium bg-grey rounded-lg px-5 py-3 cursor-pointer  hover:underline' >Admin Click Here</button>

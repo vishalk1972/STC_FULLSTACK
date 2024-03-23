@@ -96,6 +96,10 @@ const ChatData = () => {
     console.log('reply')
   }
   const handleSend = () => {
+    if(suggestion_text==="")
+    {
+      return;
+    }
     setSuggestion_text("")
     let url = `${backurl}/api/studentSuggestions/create`
     const data = {}
@@ -146,7 +150,7 @@ const ChatData = () => {
   // console.log(allChats)
   //bg-[#dde4f9]
   return (
-    <div className={`text-2xl h-[87%]  ${!id ? "hidden" : ""}`}>
+    <div className={`text-2xl md:h-[87%] h-[87%]  ${!id ? "hidden" : ""} `}>
       <Toaster/>
       <div className='h-full overflow-auto bg-[#cfd9f7] p-2' ref={chatContainerRef}>
         {
@@ -197,7 +201,7 @@ const ChatData = () => {
 
       </div>
       {/* Input */}
-      <div className='border border-t-gray-300 bg-[#e5e9f5] h-[20%] flex justify-between px-6 gap-5 items-center mb-1 pb-6 relative'>
+      <div className='border  border-t-gray-300 bg-[#e5e9f5] md:h-[20%] h-[28%] flex justify-between px-6 gap-5 md:mb-0 items-center md:pb-6 '>
         {/* <button onClick={handleAttach}><TiAttachmentOutline className='w-9 h-9'/></button> */}
         <label htmlFor="uploadBanner">
           <TiAttachmentOutline className='w-9 h-9 cursor-pointer' />
@@ -210,7 +214,7 @@ const ChatData = () => {
             hidden
           />
         </label>
-        <div className='w-full'>
+        <div className={`w-full`}>
           <textarea
             className='w-full py-4 rounded-xl px-2 text-xl border-l-4 bg-gray-100 overflow-hidden resize-none'
             type='text'
@@ -220,7 +224,7 @@ const ChatData = () => {
             onChange={(e) => setSuggestion_text(e.target.value)}
           />
         </div>
-        <button onClick={handleSend}><LuSend className='w-9 h-9' /></button>
+        <button onClick={handleSend}><LuSend className={`w-9 h-9  ${suggestion_text.length===0 ? "hidden":"" }`} /></button>
       </div>
     </div>
   )

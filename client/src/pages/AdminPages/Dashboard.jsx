@@ -56,11 +56,6 @@ const Dashboard = () => {
                 Add Teacher
             </div>
         </Link>
-        {/* <Link className={cardclass} to="addGroup">
-            <div >
-                Add Group
-            </div>
-        </Link> */}
         <Link className={cardclass} to="addStudent">
             <div >
                 Add Student
