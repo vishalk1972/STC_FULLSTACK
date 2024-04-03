@@ -94,7 +94,7 @@ const ChatPage = () => {
         }
       })
         .then((res) => {
-         console.log(res,"okkk")
+         // console.log(res,"okkk")
          return toast.success("Upload Succesfully...")
         })
         .catch((err) => {

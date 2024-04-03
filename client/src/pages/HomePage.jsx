@@ -22,7 +22,7 @@ const HomePage = ({type}) => {
         {
             formData[key]=value
         }
-        console.log(formData);
+        // console.log(formData);
         const backurl=import.meta.env.VITE_BACKEND_URL
         setLoading(true)
         axios.post(`${backurl}/api/${type}/login`,formData)
