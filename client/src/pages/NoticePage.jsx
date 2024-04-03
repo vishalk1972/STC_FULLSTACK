@@ -18,12 +18,10 @@ const NoticePage = () => {
       })
       .then((res) => {
           setNoticeFeched(res.data.data);
-          console.log(res);
           setloading(false);
       })
       .catch((err) => {
           setloading(false);
-          console.log(err);
       });
   }
 }, [user,NoticeFeched]);
