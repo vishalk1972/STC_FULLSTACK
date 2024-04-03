@@ -17,7 +17,7 @@ const AdminAddDomain = () => {
         {
             formData[key]=value
         }
-        console.log(formData);
+        // console.log(formData);
         const backurl=import.meta.env.VITE_BACKEND_URL
         setLoading(true);
         axios.post(`${backurl}/api/domain/create`,formData,
@@ -32,7 +32,7 @@ const AdminAddDomain = () => {
             setTimeout(() => {
                 navigate("/admin/dashboard/getDomain");
             }, 120);
-            console.log(res)
+            // console.log(res)
             setTimeout(() => {
                 return toast.success("Domain Added Successfully");
             }, 1);
@@ -40,7 +40,7 @@ const AdminAddDomain = () => {
         })
         .catch((err)=>{
             setLoading(false)
-            console.log(err)
+            // console.log(err)
             toast.error(err.response.data.message)
         })
     }

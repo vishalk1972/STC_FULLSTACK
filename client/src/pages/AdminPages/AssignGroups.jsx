@@ -38,13 +38,13 @@ const AssignGroups = () => {
             }
             )
             .then((res)=>{
-                console.log(res)
+                // console.log(res)
                 setShowDetail(id);
                 setShowDetailData(res.data.data);
                 //   console.log(DomainList)
             })
             .catch((err)=>{
-                console.log(err)
+                // console.log(err)
                 // return toast.error(err.response)
             })
         }
@@ -57,7 +57,7 @@ const AssignGroups = () => {
         let first=allchecked[0];
         formData['groupId']=first
         formData['teacherId']=selectedTeacher
-        console.log(formData)
+        // console.log(formData)
         axios.post(`${backurl}/api/adminAllocation/allocateTeacher`,formData,
         {
             headers:{
@@ -67,12 +67,12 @@ const AssignGroups = () => {
         )
         .then((res)=>{
             // setLoading(false)
-            console.log(res)
+            // console.log(res)
             return toast.success(res.data.message)
         })
         .catch((err)=>{
             // setLoading(false)
-            console.log(err)
+            // console.log(err)
             return toast.error(err.response.data.message)
         })
         
@@ -93,7 +93,7 @@ const AssignGroups = () => {
             //   console.log(DomainList)
           })
           .catch((err)=>{
-              console.log(err)
+            //   console.log(err)
               // return toast.error(err.response)
           })
         }
@@ -144,7 +144,7 @@ const AssignGroups = () => {
                 }
             )
             .then((res)=>{
-                console.log(res,"-")
+                // console.log(res,"-")
                 // setGroupsLeft(res.data.data)
             })
             .catch((err)=>{
@@ -167,7 +167,7 @@ const AssignGroups = () => {
                 <select
                     className="px-1 py-2 text-xl bg-[#e8effd] cursor-pointer outline-none mx-1 rounded-lg shadow-lg hover:bg-white "
                     value={selectedDomain}
-                    onChange={(e) =>{setSelectedDomain(e.target.value);console.log(e.target.value,"->>>")}}    
+                    onChange={(e) =>{setSelectedDomain(e.target.value)}}    
                 >
                     {
                         selectedDomain ? <option value="" disabled >All Domains</option> :
@@ -189,7 +189,7 @@ const AssignGroups = () => {
                     <select
                         className="px-1 py-2 text-xl bg-[#e8effd] cursor-pointer outline-none mx-1 rounded-lg shadow-lg hover:bg-white"
                         value={selectedTeacher}
-                        onChange={(e) =>{setSelectedTeacher(e.target.value);console.log(e.target.value,"->>>")}}    
+                        onChange={(e) =>{setSelectedTeacher(e.target.value)}}    
                     >
                         <option value="" >All Teacher</option>
                         {teacherUnderDomain.map((teacher) => (

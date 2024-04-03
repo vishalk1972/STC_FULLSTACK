@@ -14,7 +14,7 @@ const DomainCard = ({Domain}) => {
   const handleDelete=(domain_name)=>{
     const data={}
     data["domain_name"]=domain_name;
-    console.log(data)
+    // console.log(data)
     if(admin && window.confirm("Are Your Sure ! You Want To Delete This Data"))
       {
         axios.delete(`${backurl}/api/domain/delete/${domain_name}`,

@@ -55,7 +55,7 @@ const AdminAddStudent = () => {
         formData["file"] = file;
         // const backurl=import.meta.env.VITE_BACKEND_URL
         let url = `${backurl}/api/csv/students/csv`
-        console.log(formData)
+        // console.log(formData)
         axios.post(url, formData, {
           headers: {
             Authorization: `Bearer ${admin?.token}`,
@@ -63,7 +63,7 @@ const AdminAddStudent = () => {
           }
         })
           .then((res) => {
-            console.log(res);
+            // console.log(res);
             navigate("/admin/dashboard/getStudent   ")
             setTimeout(() => {
                 toast.success(res.data.message)

@@ -29,7 +29,7 @@ const AssignDomain = () => {
         let formData={}
         formData['domains_id']=allchecked
         formData['teacher_id']=selectedTeacher
-        console.log(formData)
+        // console.log(formData)
         setLoading(true)
         axios.post(`${backurl}/api/adminAllocation/doaminTeacherAllocation`,formData,
         {
@@ -43,12 +43,12 @@ const AssignDomain = () => {
             setLoading(false)
             setAllChecked([]);
             // selectedTeacher(null)
-            console.log(res)
+            // console.log(res)
             return toast.success(res.data.message)
         })
         .catch((err)=>{
             setLoading(false)
-            console.log(err)
+            // console.log(err)
             return toast.error(err.response.data.message)
         })
         
@@ -73,7 +73,7 @@ const AssignDomain = () => {
             })
             .catch((err)=>{
                 // setLoading(false)
-                console.log(err)
+                // console.log(err)
                 // return toast.error(err.response)
             })
         }
@@ -96,7 +96,7 @@ const AssignDomain = () => {
             })
             .catch((err)=>{
                 // setLoading(false)
-                console.log(err)
+                // console.log(err)
                 // return toast.error(err.response)
             })
         }
@@ -115,7 +115,7 @@ const AssignDomain = () => {
                 <select
                     className={`px-1 py-2 text-xl bg-[#e8effd] outline-none mx-2 rounded-lg shadow-lg hover:bg-white`}
                     value={selectedTeacher}
-                    onChange={(e) =>{setSelectedTeacher(e.target.value);console.log(e.target.value,"->>>")}}    
+                    onChange={(e) =>{setSelectedTeacher(e.target.value)}}    
                 >
                     <option value="" >All Teacher</option>
                     {

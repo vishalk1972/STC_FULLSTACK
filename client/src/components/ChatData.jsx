@@ -48,7 +48,7 @@ const ChatData = () => {
       url = `${backurl}/api/uploadFile/file`;
       formData['fk_group'] = id;
     }
-    console.log(formData)
+    // console.log(formData)
     axios.post(url, formData, {
       headers: {
         Authorization: `Bearer ${user?.token}`,
@@ -93,7 +93,7 @@ const ChatData = () => {
     
   }, [user, allChats, id])
   const reply=()=>{
-    console.log('reply')
+    // console.log('reply')
   }
   const handleSend = () => {
     if(suggestion_text==="")
@@ -134,7 +134,7 @@ const ChatData = () => {
       }
       )
       .then((res)=>{
-          console.log(res)
+          // console.log(res)
           // setTimeout(() => {
             return toast.success(`Chat Deleted Successfully`)
           // }, 1000);  

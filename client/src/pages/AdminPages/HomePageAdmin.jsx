@@ -11,7 +11,7 @@ const HomePageAdmin = () => {
     const navigate=useNavigate();
     const {admin,SetAdmin}=useContext(userContext);
     const [loading,setloading]=useState(false)
-    console.log(admin,"admin in context")
+    // console.log(admin,"admin in context")
     useEffect(()=>{
         if(admin && admin.token)
         {
@@ -26,7 +26,7 @@ const HomePageAdmin = () => {
     {
         formData[key]=value
     }
-    console.log(formData);
+    // console.log(formData);
     const backurl=import.meta.env.VITE_BACKEND_URL
     setloading(true);
     axios.post(`${backurl}/api/admin/login`,formData)

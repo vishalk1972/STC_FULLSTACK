@@ -56,7 +56,7 @@ const AddAllStudent = () => {
             formData[key]=value
         }
     }
-    console.log(formData)
+    // console.log(formData)
     const updatedForm={};
  
     if(selectedSize==2)
@@ -82,7 +82,7 @@ const AddAllStudent = () => {
     {
         return toast.error('Domain Not Selected !!')
     }
-     console.log(updatedForm);
+    //  console.log(updatedForm);
      const backurl=import.meta.env.VITE_BACKEND_URL
      setloading(true)
      axios.post(`${backurl}/api/group/create`,updatedForm,
@@ -146,7 +146,7 @@ const AddAllStudent = () => {
                     <select
                         className={`px-1 py-2 w-full text-xl bg-[#e8effd] outline-none rounded-lg shadow-sm border-2 border-gray-400 hover:bg-white`}
                         // value={selectedTeacher}
-                        onChange={(e) =>{setSelectedSize(e.target.value);console.log(e.target.value,"->>>")}}    
+                        onChange={(e) =>{setSelectedSize(e.target.value)}}    
                     >
                     <option value="" >Select Size Of Group</option>
                     {optionList!==null && optionList.map((option) => (
@@ -200,7 +200,7 @@ const AddAllStudent = () => {
                 <select
                     className="py-2 w-full text-xl bg-[#e8effd] cursor-pointer outline-none rounded-lg px-2 shadow-sm border-2 border-gray-400 hover:bg-white "
                     value={selectedDomain}
-                    onChange={(e) =>{setSelectedDomain(e.target.value);console.log(e.target.value,"->>>")}}    
+                    onChange={(e) =>{setSelectedDomain(e.target.value)}}    
                 >
                     {
                         selectedDomain ? <option value="" disabled >All Domains</option> :

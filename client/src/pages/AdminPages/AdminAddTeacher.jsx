@@ -26,7 +26,7 @@ const AdminAddTeacher = () => {
         }
     }
     formData['designation']=designation
-    console.log(formData);
+    // console.log(formData);
     const backurl=import.meta.env.VITE_BACKEND_URL
     setLoading(true)
     axios.post(`${backurl}/api/teacher/signup`,formData,
@@ -56,7 +56,7 @@ const AdminAddTeacher = () => {
         formData["file"] = file;
         // const backurl=import.meta.env.VITE_BACKEND_URL
         let url = `${backurl}/api/csv/teachers/csv`
-        console.log(formData)
+        // console.log(formData)
         axios.post(url, formData, {
           headers: {
             Authorization: `Bearer ${admin?.token}`,
@@ -64,7 +64,8 @@ const AdminAddTeacher = () => {
           }
         })
           .then((res) => {
-            console.log(res);
+            // console.log(res);
+            
             toast.success(res.data.message || "Teachers Added Through CSV Successfully......")
           })
           .catch((err) => {

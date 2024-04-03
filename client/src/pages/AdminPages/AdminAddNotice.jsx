@@ -14,7 +14,7 @@ const AdminAddNotice = () => {
     const formData={};
     formData['title']=Title
     formData['message']=Post
-    console.log(admin?.token)
+    // console.log(admin?.token)
     const PostNotice=()=>{
         setloading(true)
         axios.post(`${backurl}/api/adminDashboard/createBroadcast`,formData,
