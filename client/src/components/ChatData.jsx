@@ -23,11 +23,15 @@ const ChatData = () => {
 
   const chatContainerRef = useRef();
   const { id } = useParams()
+  const [sid,setsid]=useState(null);
+  // setsid(id);
   const [suggestion_text, setSuggestion_text] = useState("")
   const backurl = import.meta.env.VITE_BACKEND_URL;
   const [allChats, setallChats] = useState([])
   const { user } = useContext(userContext)
   const [loading,setloading]=useState(false);
+  const prevId = useRef();
+  const prevAllChats = useRef(allChats)
   // console.log(allChats);
   // Download File EndPoint
   const fileDownload = (link) => {
@@ -90,15 +94,16 @@ const ChatData = () => {
       })
       .then((res) => {
         //  console.log(res,"upload.............")
-        setloading(false)
+        // setloading(false)
         setallChats(res.data.data);
       })
       .catch((err)=>{
-        setloading(false)
+        // setloading(false)
       })
     }
     
-  }, [user, allChats])
+  }, [allChats,id])
+  
   const reply=()=>{
     // console.log('reply')
   }
