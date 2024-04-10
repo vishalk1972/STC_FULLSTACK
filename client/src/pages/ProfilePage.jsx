@@ -5,6 +5,7 @@ import { removeFromLocal } from '../assests/local'
 import axios from 'axios'
 import { Toaster, toast } from 'react-hot-toast'
 import Loading from '../Common/Loading'
+import { IoCloseOutline } from "react-icons/io5";
 
 const ProfilePage = ({type}) => {
    
@@ -43,6 +44,7 @@ const ProfilePage = ({type}) => {
     <div className="md:w-[30.5%]  w-[100%]  h-screen bg-[#E8EDFA] flex flex-col  items-center gap-7 mx-1 py-5 transition-transform duration-500 transform translate-x-0}" >
         <Toaster/>
         {/* <h1 className='text-2xl mt-4'>PROFILE</h1> */}
+        {/* <div className='block mr-auto p-2 rounded-full bg-gray-200 ml-2 cursor-pointer hover:bg-slate-300 '><IoCloseOutline className='w-10 h-10'/></div> */}
         <img className='w-44 h-44 rounded-full shadow-2xl' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTb3IwnFoJ9Fw5d_q5rHVElUqeHTWeHTaWuIQ&usqp=CAU'></img>
         { user && <h2 className='text-xl font-bold'>{user.type==="student" ? user.student.first_name : user.teacher.name}</h2>}
         { user && <h2 className='text-xl font-extralight'>{user.type==="student" ? user.student.email : user.teacher.email}</h2>}

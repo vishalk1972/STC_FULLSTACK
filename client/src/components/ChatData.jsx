@@ -15,6 +15,7 @@ import { MdDelete } from "react-icons/md";
 import axios, { all } from 'axios';
 import { userContext } from '../App';
 import { Toaster,toast } from 'react-hot-toast';
+import Loading from '../Common/Loading';
 
 const img2 = "https://i.snipboard.io/LYNi6y.jpg";
 const img ="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Google_Chrome_icon_%28September_2014%29.svg/1200px-Google_Chrome_icon_%28September_2014%29.svg.png";
@@ -26,16 +27,17 @@ const ChatData = () => {
   const backurl = import.meta.env.VITE_BACKEND_URL;
   const [allChats, setallChats] = useState([])
   const { user } = useContext(userContext)
+  const [loading,setloading]=useState(false);
   // console.log(allChats);
   // Download File EndPoint
   const fileDownload = (link) => {
-    let link_clean = link.slice(2, -2);
-    const isEdge = window.navigator.userAgent.includes("microsoft-edge");
-    if (isEdge) {
-      window.location.href = link_clean; 
-    } else {
-      window.open(link_clean, '_blank');
+    if (link === undefined || link === null) {
+      console.error('Invalid link:', link);
+      return;
     }
+
+    let link_clean = link.slice(2, -2);
+    window.open("microsoft-edge:" + link_clean);
   }
 
   // Upload File EndPoint
@@ -79,7 +81,8 @@ const ChatData = () => {
       if (user.type === "teacher") {
         url = `${backurl}/api/teacherChat/group/${parseInt(id)}`
       }
-
+      // setloading(true)
+      // setallChats(null)
       axios.get(url, {
         headers: {
           Authorization: `Bearer ${user?.token}`
@@ -87,11 +90,15 @@ const ChatData = () => {
       })
       .then((res) => {
         //  console.log(res,"upload.............")
+        setloading(false)
         setallChats(res.data.data);
+      })
+      .catch((err)=>{
+        setloading(false)
       })
     }
     
-  }, [user, allChats, id])
+  }, [user, allChats])
   const reply=()=>{
     // console.log('reply')
   }
@@ -116,10 +123,13 @@ const ChatData = () => {
         Authorization: `Bearer ${user?.token}`
       }
     })
+      // setloading(true)
       .then((res) => {
         // console.log(res)
+        // setloading(false);
       })
       .catch((err) => {
+        // setloading(false);
         toast.err(err.response.data.message || "Upload Error")
       })
   }
@@ -154,33 +164,7 @@ const ChatData = () => {
       <Toaster/>
       <div className='h-full overflow-auto bg-[#cfd9f7] p-2' ref={chatContainerRef}>
         {
-          allChats && allChats.map((chat) => (
-            // <MessageBox
-            //   className="whitespace-pre-line"
-            //   key={chat.uploaded_at}
-            //   onClick={(e)=>console.log(e)}
-            //   avatar={img}
-            //   title={chat.uploader_name}
-            //   position={chat.teacher_uploaded && user?.type === "teacher" || chat.teacher_uploaded === false && user?.type === "student" ? "right" : "left"}
-            //   type={chat.is_file ? "file" : "text"}
-            //   text={chat.is_file ? chat.data.substring(
-            //     chat.data.indexOf('_') + 1,
-            //     chat.data.indexOf('?')
-            //   ) : chat.data}
-            //   data={{
-            //     uri: img2,
-            //     status: {
-            //       click: false,
-            //       loading: 0
-            //     }
-            //   }}
-            //   date={chat.uploaded_at}
-            //   onDownload={() => { fileDownload(chat.data) }}
-            //   toBottomHeight={true}
-            //   replyButton
-  
-            // />
-            
+          loading===false ? allChats && allChats.map((chat) => (
             <div className={`bg-[#f7f8fd] shadow-lg shadow-b shadow-l border-b-2   border-slate-400 w-fit h-fit text-gray-900 ${chat.teacher_uploaded && user?.type === "teacher" || chat.teacher_uploaded === false && user?.type === "student" ? "ml-auto border-l-2  " : " mr-auto border-r-2" } ${chat.is_file ? " px-2 ":""} rounded-xl m-2 max-w-[65%] whitespace-pre-line `}>
                 <div className='flex'>
                 <h1 className='mr-auto text-sm font-bold  mb-1 pt-2 pl-3 pr-5 '>{chat.uploader_name}</h1>
@@ -197,7 +181,9 @@ const ChatData = () => {
                 <h1 className='flex justify-end text-sm px-2 pb-1 text-gray-600'>{formatDistanceToNow(new Date(chat.uploaded_at))}</h1>
             </div>
           ))
+          :<Loading/>
         }
+
 
       </div>
       {/* Input */}
